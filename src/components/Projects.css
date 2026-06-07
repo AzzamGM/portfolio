@@ -1,0 +1,136 @@
+.projects__head {
+  margin-bottom: 48px;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.project {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.project:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.project--featured {
+  grid-column: span 2;
+  background: linear-gradient(
+    160deg,
+    rgba(34, 211, 238, 0.08),
+    var(--bg-card) 55%
+  );
+  border-color: var(--border-strong);
+}
+
+.project__glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.project:hover .project__glow {
+  opacity: 0.6;
+}
+
+.project__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.project__tag {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-2);
+  background: var(--accent-soft);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.project__star {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fcd34d;
+}
+
+.project__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.project--featured .project__title {
+  font-size: 1.7rem;
+}
+
+.project__desc {
+  color: var(--text-muted);
+  margin-bottom: 22px;
+  flex: 1;
+}
+
+.project__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.project__tech li {
+  font-size: 0.8rem;
+  font-weight: 600;
+  /* text tinted to each tech's brand color (falls back to default) */
+  color: var(--tech-color, var(--text));
+  background: color-mix(in srgb, var(--tech-color, #ffffff) 10%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--tech-color, var(--accent-2)) 30%, transparent);
+  padding: 5px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.project__tech li:hover {
+  background: color-mix(in srgb, var(--tech-color, #ffffff) 18%, transparent);
+}
+
+.project__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--accent-2);
+  transition: gap 0.2s ease;
+  width: fit-content;
+}
+.project__link:hover {
+  gap: 12px;
+}
+
+@media (max-width: 880px) {
+  .project--featured {
+    grid-column: span 1;
+  }
+}
