@@ -14,7 +14,7 @@ import {
 
 export const profile = {
   name: "Azzam Al-Maimani",
-  role: "Software Engineering Graduate",
+  role: "Software Engineer - Web Developer",
   tagline:
     "Web developer at STC, building the next generation of MySTC customer portals.",
   blurb:
