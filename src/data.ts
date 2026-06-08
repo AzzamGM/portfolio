@@ -56,8 +56,8 @@ export const skills: Skill[] = [
 
 export const techColors: Record<string, string> = {
   ...Object.fromEntries(skills.map((s) => [s.name, s.color])),
-  Remix:    "#ffffff",
-  Vite:     "#bd34fe",
+  Remix: "#ffffff",
+  Vite: "#bd34fe",
   Tailwind: "#38bdf8",
   TanStack: "#ef4444",
 };
@@ -71,6 +71,7 @@ export type Project = {
   link?: string;
   linkText?: string;
   featured?: boolean;
+  tagClass?: string;
 };
 
 export const projects: Project[] = [
@@ -80,17 +81,31 @@ export const projects: Project[] = [
     tag: "STC · Channels Platform",
     description:
       "Played a major role on the Web Portal Team developing/maintaining/improving MySTC4",
-    tech: ["Remix", "React", "TypeScript", "Redux", "TanStack", "Tailwind", "CSS", "Vite", "Node.js"],
+    tech: [
+      "Remix",
+      "React",
+      "TypeScript",
+      "Redux",
+      "TanStack",
+      "Tailwind",
+      "CSS",
+      "Vite",
+      "Node.js",
+    ],
     link: "https://mystc.stc.com.sa/",
     linkText: "View Project",
     featured: true,
+    tagClass: "project__tag--purple",
   },
   {
-    title: "SAMI Summer Training Program",
-    tag: "SAMI Advanced Technologies",
+    title: "BAAM",
+    tag: "Esports Website",
     description:
-      "Assisted in investigating and fixing real bugs and issues within existing production projects, gaining hands-on software experience of how engineering work is carried out in a professional environment.",
-    tech: ["JavaScript", "React", "Node.js"],
+      "A BAAM Esports homepage featuring live match updates, team standings, schedule details, and an integrated merchandise store.",
+    tech: ["React", "TypeScript", "CSS", "Vite"],
+    link: "https://azzamgm.github.io/BAAM/",
+    linkText: "View Live Demo",
+    tagClass: "project__tag--red",
   },
   {
     title: "Personal Portfolio",

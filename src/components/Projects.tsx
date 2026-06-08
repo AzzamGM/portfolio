@@ -41,7 +41,9 @@ export default function Projects() {
             <div className="project__glow" />
 
             <div className="project__top">
-              <span className="project__tag">{p.tag}</span>
+              <span className={`project__tag${p.tagClass ? ` ${p.tagClass}` : ''}`}>
+                {p.tag}
+              </span>
               {p.featured && (
                 <span className="project__star">
                   <HiStar /> Featured

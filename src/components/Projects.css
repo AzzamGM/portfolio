@@ -67,6 +67,16 @@
   padding: 5px 12px;
   border-radius: 999px;
 }
+.project__tag--purple {
+  color: #eeaaff;
+  background: #24103dc2;
+  border-color: #a855f738;
+}
+.project__tag--red {
+  color: #ff3737;
+  background: rgba(255, 28, 28, 0.16);
+  border-color: rgba(255, 0, 0, 0.35);
+}
 .project__star {
   display: inline-flex;
   align-items: center;
