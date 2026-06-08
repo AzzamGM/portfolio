@@ -12,41 +12,33 @@ import {
   SiRedux,
 } from "react-icons/si";
 
-/* -------------------------------------------------- */
-/*  Personal / contact info                            */
-/* -------------------------------------------------- */
 export const profile = {
   name: "Azzam Al-Maimani",
   role: "Software Engineering Graduate",
   tagline:
-    "Frontend developer at STC, building the next generation of MySTC customer portals.",
+    "Web developer at STC, building the next generation of MySTC customer portals.",
   blurb:
     "Software Engineer and 2024 graduate, now building customer-facing products on the Portal Team at STC. I craft clean, performant web experiences and care about contributing to Saudi Arabia's Vision 2030 through impactful, real-world software.",
   email: "azzamgm1412h@gmail.com",
   location: "Saudi Arabia",
   github: "https://github.com/AzzamGM ",
-  linkedin: "https://www.linkedin.com/in/azzam-al-maimani",
+  linkedin: "https://www.linkedin.com/in/azzam-al-maimani-2b0350212/",
 };
 
-/* -------------------------------------------------- */
-/*  About highlights (soft skills)                     */
-/* -------------------------------------------------- */
 export const highlights: string[] = [
   "Problem Solving",
   "Fast Learner",
   "Communication Skills",
   "Team Player",
   "Dynamic & Innovative",
+  "Fluent in English",
 ];
 
-/* -------------------------------------------------- */
-/*  Skills & proficiencies (brand-color icons)         */
-/* -------------------------------------------------- */
 export type Skill = {
   name: string;
   icon: IconType;
   color: string;
-  level: number; // 0-100, drives the proficiency bar
+  level: number;
 };
 
 export const skills: Skill[] = [
@@ -62,38 +54,42 @@ export const skills: Skill[] = [
   { name: "GitHub", icon: SiGithub, color: "#e2e8f0", level: 88 },
 ];
 
-/* Map of tech name -> brand color, derived from `skills` so the
-   project tech tags can be colored to match each tech's logo. */
-export const techColors: Record<string, string> = Object.fromEntries(
-  skills.map((s) => [s.name, s.color])
-);
+export const techColors: Record<string, string> = {
+  ...Object.fromEntries(skills.map((s) => [s.name, s.color])),
+  Remix:    "#ffffff",
+  Vite:     "#bd34fe",
+  Tailwind: "#38bdf8",
+  TanStack: "#ef4444",
+};
 
-/* -------------------------------------------------- */
-/*  Projects (placeholders — edit freely)              */
-/* -------------------------------------------------- */
 export type Project = {
   title: string;
+  logo?: string;
   tag: string;
   description: string;
   tech: string[];
   link?: string;
+  linkText?: string;
   featured?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    title: "MySTC 4 & 5 Customer Portals",
+    title: "MySTC",
+    logo: "/portfolio/STC.svg",
     tag: "STC · Channels Platform",
     description:
-      "Played a key role on the Portal Team developing the MySTC 4 portal and the upcoming MySTC 5, delivering customer-facing features in a fast-paced Agile/Scrum environment.",
-    tech: ["React", "TypeScript", "Redux", "CSS"],
+      "Played a major role on the Web Portal Team developing/maintaining/improving MySTC4",
+    tech: ["Remix", "React", "TypeScript", "Redux", "TanStack", "Tailwind", "CSS", "Vite", "Node.js"],
+    link: "https://mystc.stc.com.sa/",
+    linkText: "View Project",
     featured: true,
   },
   {
     title: "SAMI Summer Training Program",
     tag: "SAMI Advanced Technologies",
     description:
-      "Assisted in investigating and fixing real bugs and issues within existing production projects, gaining hands-on experience of how engineering work is carried out in a professional environment.",
+      "Assisted in investigating and fixing real bugs and issues within existing production projects, gaining hands-on software experience of how engineering work is carried out in a professional environment.",
     tech: ["JavaScript", "React", "Node.js"],
   },
   {
@@ -103,15 +99,10 @@ export const projects: Project[] = [
       "This very site — a fully responsive, animated portfolio built with Vite, React & Framer Motion to showcase my work and skills.",
     tech: ["React", "TypeScript", "CSS"],
     link: "https://github.com/AzzamGM",
+    linkText: "View GitHub Projects",
   },
 ];
 
-/* -------------------------------------------------- */
-/*  Experience timeline                                */
-/* -------------------------------------------------- */
-/* A piece of text that may carry its own (brand) color.
-   `org`, `role` and `school` accept either a plain string or
-   an array of these segments so individual words can be colored. */
 export type Segment = { t: string; c?: string; badge?: boolean };
 export type RichText = string | Segment[];
 
@@ -149,7 +140,7 @@ export const experience: Experience[] = [
     period: "Jun 2024 — Aug 2024 · 2 months",
     points: [
       "Assisted in investigating and fixing real bugs and issues within existing production projects.",
-      "Gained hands-on experience of how engineering work is carried out in a professional environment.",
+      "Gained hands-on experience of how software engineering work is carried out in a professional environment.",
     ],
   },
   {
@@ -162,9 +153,6 @@ export const experience: Experience[] = [
   },
 ];
 
-/* -------------------------------------------------- */
-/*  Education                                           */
-/* -------------------------------------------------- */
 export const education: {
   degree: string;
   school: RichText;
@@ -177,14 +165,11 @@ export const education: {
   gpa: "4.27 / 5.0",
 };
 
-/* -------------------------------------------------- */
-/*  Languages                                           */
-/* -------------------------------------------------- */
 export type Language = {
   name: string;
   level: string;
   note?: string;
-  value: number; // 0-100 for the ring
+  value: number;
 };
 
 export const languages: Language[] = [
@@ -192,9 +177,6 @@ export const languages: Language[] = [
   { name: "English", level: "Fluent", note: "IELTS 6.0 (2018)", value: 98 },
 ];
 
-/* -------------------------------------------------- */
-/*  Nav links                                          */
-/* -------------------------------------------------- */
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },

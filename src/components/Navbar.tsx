@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaWrench } from 'react-icons/fa';
-import { navLinks, profile } from '../data';
+import { navLinks } from '../data';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -51,7 +51,7 @@ export default function Navbar() {
 
         <a
           className="nav__cta btn btn-primary"
-          href={`mailto:${profile.email}`}
+          href="#contact"
         >
           Let’s Talk
         </a>
@@ -91,7 +91,7 @@ export default function Navbar() {
             </ul>
             <a
               className="btn btn-primary nav__mobile-cta"
-              href={`mailto:${profile.email}`}
+              href="#contact"
               onClick={() => setOpen(false)}
             >
               Let’s Talk

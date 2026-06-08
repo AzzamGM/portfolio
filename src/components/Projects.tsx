@@ -49,7 +49,13 @@ export default function Projects() {
               )}
             </div>
 
-            <h3 className="project__title">{p.title}</h3>
+            {p.logo ? (
+              <div className="project__logo-wrap">
+                <img src={p.logo} alt={p.title} className="project__logo" />
+              </div>
+            ) : (
+              <h3 className="project__title">{p.title}</h3>
+            )}
             <p className="project__desc">{p.description}</p>
 
             <ul className="project__tech">
@@ -77,7 +83,7 @@ export default function Projects() {
                 target="_blank"
                 rel="noreferrer"
               >
-                View project <HiArrowUpRight />
+                {p.linkText} <HiArrowUpRight />
               </a>
             )}
           </motion.article>

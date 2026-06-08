@@ -77,6 +77,33 @@
   box-shadow: var(--shadow-glow);
 }
 
+/* email copy item is a <button>; reset native styles + match link items */
+.contact__item--copy {
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* confirmation state after copying */
+.contact__item.is-copied {
+  border-color: var(--accent-2);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-glow);
+}
+.contact__item.is-copied .contact__icon {
+  color: #04212b;
+  background: var(--gradient);
+  border-color: transparent;
+}
+.contact__item.is-copied .contact__item-label {
+  color: var(--accent-2);
+}
+.contact__item.is-copied .contact__item-arrow {
+  color: var(--accent-2);
+}
+
 .contact__icon {
   display: grid;
   place-items: center;
@@ -90,21 +117,10 @@
   flex-shrink: 0;
 }
 
-.contact__item-meta {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
 .contact__item-label {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-.contact__item-value {
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-h);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .contact__item-arrow {

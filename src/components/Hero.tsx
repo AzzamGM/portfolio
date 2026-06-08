@@ -3,6 +3,7 @@ import {
   HiArrowDown,
   HiOutlineMail,
   HiOutlineLocationMarker,
+  HiOutlineGlobe
 } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { FaCode } from 'react-icons/fa';
@@ -76,10 +77,13 @@ export default function Hero() {
 
         <motion.div className="hero__meta" variants={item}>
           <span>
-            <HiOutlineLocationMarker /> {profile.location}
+            <HiOutlineGlobe /> Saudi
           </span>
           <span>
             <HiOutlineMail /> {profile.email}
+          </span>
+          <span>
+            <HiOutlineLocationMarker /> {profile.location}
           </span>
         </motion.div>
 

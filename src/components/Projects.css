@@ -85,6 +85,25 @@
   font-size: 1.7rem;
 }
 
+.project__logo-wrap {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 12px;
+}
+
+.project__logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  box-sizing: content-box;
+}
+.project--featured .project__logo {
+  height: 44px;
+}
+
 .project__desc {
   color: var(--text-muted);
   margin-bottom: 22px;

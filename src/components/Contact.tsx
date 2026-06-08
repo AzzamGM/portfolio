@@ -1,33 +1,46 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { HiOutlineMail } from 'react-icons/hi';
+import { HiOutlineMail, HiCheck } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { HiArrowUpRight } from 'react-icons/hi2';
 import { fadeUp, stagger, viewport } from '../anim';
 import { profile } from '../data';
 import './Contact.css';
 
-const channels = [
-  {
-    icon: HiOutlineMail,
-    label: 'Email',
-    value: profile.email,
-    href: `mailto:${profile.email}`,
-  },
-  {
-    icon: FaLinkedinIn,
-    label: 'LinkedIn',
-    value: 'Azzam Al-Maimani',
-    href: profile.linkedin,
-  },
-  {
-    icon: FaGithub,
-    label: 'GitHub',
-    value: 'My GitHub',
-    href: profile.github,
-  },
+type Channel = {
+  icon: typeof HiOutlineMail;
+  label: string;
+  href?: string;
+  copy?: string;
+};
+
+const channels: Channel[] = [
+  { icon: HiOutlineMail, label: 'Email',    copy: profile.email    },
+  { icon: FaLinkedinIn,  label: 'LinkedIn', href: profile.linkedin },
+  { icon: FaGithub,      label: 'GitHub',   href: profile.github   },
 ];
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async (email: string) => {
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      // fallback for browsers without the async clipboard API
+      const ta = document.createElement('textarea');
+      ta.value = email;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section id="contact" className="section contact">
       <motion.div
@@ -61,7 +74,37 @@ export default function Contact() {
         <motion.div className="contact__grid" variants={stagger}>
           {channels.map((c) => {
             const Icon = c.icon;
-            const external = c.href.startsWith('http');
+
+            // Email -> copy-to-clipboard button with "Copied!" feedback
+            if (c.copy) {
+              return (
+                <motion.button
+                  key={c.label}
+                  type="button"
+                  className={`contact__item contact__item--copy ${
+                    copied ? 'is-copied' : ''
+                  }`}
+                  onClick={() => copyEmail(c.copy!)}
+                  variants={fadeUp}
+                  whileHover={{ y: -5 }}
+                  aria-label="Copy email address"
+                >
+                  <span className="contact__icon">
+                    {copied ? <HiCheck /> : <Icon />}
+                  </span>
+                  <span className="contact__item-label">
+                    {copied ? 'Copied!' : c.label}
+                  </span>
+                  {copied ? (
+                    <HiCheck className="contact__item-arrow" />
+                  ) : (
+                    <HiArrowUpRight className="contact__item-arrow" />
+                  )}
+                </motion.button>
+              );
+            }
+
+            const external = c.href!.startsWith('http');
             return (
               <motion.a
                 key={c.label}
@@ -75,10 +118,7 @@ export default function Contact() {
                 <span className="contact__icon">
                   <Icon />
                 </span>
-                <span className="contact__item-meta">
-                  <span className="contact__item-label">{c.label}</span>
-                  <span className="contact__item-value">{c.value}</span>
-                </span>
+                <span className="contact__item-label">{c.label}</span>
                 <HiArrowUpRight className="contact__item-arrow" />
               </motion.a>
             );
