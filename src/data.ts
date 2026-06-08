@@ -80,7 +80,7 @@ export const projects: Project[] = [
     logo: "/portfolio/STC.svg",
     tag: "STC · Channels Platform",
     description:
-      "Played a major role on the Web Portal Team developing/maintaining/improving MySTC4",
+      "Played a major role on the Web Portal Team developing, maintaining and improving MySTC.",
     tech: [
       "Remix",
       "React",
@@ -101,7 +101,7 @@ export const projects: Project[] = [
     title: "BAAM",
     tag: "Esports Website",
     description:
-      "A BAAM Esports homepage featuring live match updates, team standings, schedule details, and an integrated merchandise store.",
+      "An Esports homepage featuring live match updates, team standings, schedule details, and an integrated merchandise store.",
     tech: ["React", "TypeScript", "CSS", "Vite"],
     link: "https://azzamgm.github.io/BAAM/",
     linkText: "View Live Demo",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
       "This very site — a fully responsive, animated portfolio built with Vite, React & Framer Motion to showcase my work and skills.",
     tech: ["React", "TypeScript", "CSS"],
     link: "https://github.com/AzzamGM",
-    linkText: "View GitHub Projects",
+    linkText: "Other GitHub Projects",
   },
 ];
 

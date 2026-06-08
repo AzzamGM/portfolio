@@ -38,8 +38,6 @@ export default function Projects() {
             variants={fadeUp}
             whileHover={{ y: -8 }}
           >
-            <div className="project__glow" />
-
             <div className="project__top">
               <span className={`project__tag${p.tagClass ? ` ${p.tagClass}` : ''}`}>
                 {p.tag}
