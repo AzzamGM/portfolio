@@ -15,7 +15,7 @@
   --accent-2: #00c45e;
   --accent-soft: rgba(0, 148, 72, 0.13);
   --accent-glow: rgba(0, 148, 72, 0.38);
-  --gradient: linear-gradient(135deg, #00c45e 0%, #009448 55%, #006c35 100%);
+  --gradient: linear-gradient(135deg, #00c45e 0%, #00a650 100%);
 
   --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.45);

@@ -1,6 +1,6 @@
 import { FaGithub, FaLinkedinIn, FaWrench } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
-import { profile, navLinks } from '../data';
+import { profile } from '../data';
 import './Footer.css';
 
 export default function Footer() {
