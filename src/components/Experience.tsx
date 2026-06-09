@@ -6,7 +6,6 @@ import { experience, education } from '../data';
 import type { RichText } from '../data';
 import './Experience.css';
 
-/* Render a plain string or an array of colored segments. */
 function Rich({ value }: { value: RichText }) {
   if (typeof value === 'string') return <>{value}</>;
   return (
@@ -30,7 +29,6 @@ function Rich({ value }: { value: RichText }) {
   );
 }
 
-/* flatten a RichText to a string for stable React keys */
 function keyOf(value: RichText) {
   return typeof value === 'string' ? value : value.map((s) => s.t).join('');
 }
@@ -112,7 +110,6 @@ export default function Experience() {
           );
         })}
 
-        {/* Education entry */}
         <motion.div
           className="tl-item"
           variants={fadeUp}

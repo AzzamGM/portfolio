@@ -77,7 +77,6 @@
   box-shadow: var(--shadow-glow);
 }
 
-/* email copy item is a <button>; reset native styles + match link items */
 .contact__item--copy {
   width: 100%;
   text-align: left;
@@ -86,7 +85,6 @@
   cursor: pointer;
 }
 
-/* confirmation state after copying */
 .contact__item.is-copied {
   border-color: var(--accent-2);
   background: var(--accent-soft);
@@ -117,10 +115,25 @@
   flex-shrink: 0;
 }
 
+.contact__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .contact__item-label {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-h);
+}
+
+.contact__item-hint {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.contact__item.is-copied .contact__item-hint {
+  color: var(--accent-2);
 }
 
 .contact__item-arrow {

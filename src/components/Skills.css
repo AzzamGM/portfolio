@@ -9,6 +9,7 @@
 }
 
 .skill {
+  --glow: 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -17,12 +18,12 @@
   gap: 14px;
   text-align: center;
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 1px solid
+    color-mix(in srgb, var(--skill-color) calc(55% * var(--glow)), var(--border));
   border-radius: var(--radius);
   padding: 30px 18px;
   overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease,
-    background 0.25s ease;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, calc(0.4 * var(--glow)));
 }
 .skill::before {
   content: '';
@@ -33,16 +34,8 @@
     color-mix(in srgb, var(--skill-color) 20%, transparent),
     transparent 70%
   );
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  opacity: var(--glow);
   pointer-events: none;
-}
-.skill:hover {
-  border-color: color-mix(in srgb, var(--skill-color) 55%, transparent);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-}
-.skill:hover::before {
-  opacity: 1;
 }
 
 .skill__icon {
@@ -55,11 +48,9 @@
   color: var(--skill-color);
   background: color-mix(in srgb, var(--skill-color) 12%, transparent);
   border: 1px solid color-mix(in srgb, var(--skill-color) 30%, transparent);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.skill:hover .skill__icon {
-  transform: scale(1.08);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--skill-color) 45%, transparent);
+  transform: scale(calc(1 + 0.08 * var(--glow)));
+  box-shadow: 0 0 24px
+    color-mix(in srgb, var(--skill-color) calc(45% * var(--glow)), transparent);
 }
 
 .skill__name {

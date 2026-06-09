@@ -10,7 +10,6 @@
   gap: 40px;
 }
 
-/* ---------- left: text ---------- */
 .hero__badge {
   display: inline-flex;
   align-items: center;
@@ -125,7 +124,6 @@
   box-shadow: var(--shadow-glow);
 }
 
-/* ---------- right: visual ---------- */
 .hero__visual {
   position: relative;
   display: grid;
@@ -220,7 +218,6 @@
   right: 20%;
 }
 
-/* ---------- scroll hint ---------- */
 .hero__scroll {
   position: absolute;
   bottom: 26px;

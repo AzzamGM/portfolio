@@ -1,6 +1,5 @@
 import type { Variants } from 'framer-motion';
 
-/* A reveal-from-below used across sections */
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   show: {
@@ -24,7 +23,6 @@ export const scaleIn: Variants = {
   },
 };
 
-/* Parent that staggers its children's reveals */
 export const stagger: Variants = {
   hidden: {},
   show: {
@@ -32,6 +30,4 @@ export const stagger: Variants = {
   },
 };
 
-/* Standard viewport config: replay every time the element enters the
-   viewport (and reverse back to `hidden` when it scrolls out of view). */
 export const viewport = { once: false, amount: 0.2 } as const;

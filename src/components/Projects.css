@@ -115,7 +115,6 @@
 .project__tech li {
   font-size: 0.8rem;
   font-weight: 600;
-  /* text tinted to each tech's brand color (falls back to default) */
   color: var(--tech-color, var(--text));
   background: color-mix(in srgb, var(--tech-color, #ffffff) 10%, transparent);
   border: 1px solid

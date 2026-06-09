@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { HiOutlineMail, HiCheck } from 'react-icons/hi';
+import { HiOutlineMail, HiCheck, HiOutlineClipboardCopy } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { HiArrowUpRight } from 'react-icons/hi2';
 import { fadeUp, stagger, viewport } from '../anim';
@@ -27,7 +27,6 @@ export default function Contact() {
     try {
       await navigator.clipboard.writeText(email);
     } catch {
-      // fallback for browsers without the async clipboard API
       const ta = document.createElement('textarea');
       ta.value = email;
       ta.style.position = 'fixed';
@@ -75,7 +74,6 @@ export default function Contact() {
           {channels.map((c) => {
             const Icon = c.icon;
 
-            // Email -> copy-to-clipboard button with "Copied!" feedback
             if (c.copy) {
               return (
                 <motion.button
@@ -92,13 +90,16 @@ export default function Contact() {
                   <span className="contact__icon">
                     {copied ? <HiCheck /> : <Icon />}
                   </span>
-                  <span className="contact__item-label">
-                    {copied ? 'Copied!' : c.label}
+                  <span className="contact__item-text">
+                    <span className="contact__item-label">{c.label}</span>
+                    <span className="contact__item-hint">
+                      {copied ? 'Copied!' : 'Click to copy'}
+                    </span>
                   </span>
                   {copied ? (
                     <HiCheck className="contact__item-arrow" />
                   ) : (
-                    <HiArrowUpRight className="contact__item-arrow" />
+                    <HiOutlineClipboardCopy className="contact__item-arrow" />
                   )}
                 </motion.button>
               );

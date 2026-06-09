@@ -80,9 +80,6 @@ export default function Hero() {
             <HiOutlineGlobe /> Saudi
           </span>
           <span>
-            <HiOutlineMail /> {profile.email}
-          </span>
-          <span>
             <HiOutlineLocationMarker /> {profile.location}
           </span>
         </motion.div>
