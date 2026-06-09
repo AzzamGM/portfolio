@@ -9,7 +9,7 @@
 }
 
 .nav--scrolled {
-  background: rgba(11, 20, 16, 0.72);
+  background: rgba(7, 16, 10, 0.72);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
@@ -43,7 +43,7 @@
   height: 38px;
   border-radius: 11px;
   background: var(--gradient);
-  color: #04212b;
+  color: #e8f5ee;
   font-weight: 800;
   box-shadow: 0 0 20px var(--accent-glow);
 }
@@ -124,7 +124,7 @@
 
   .nav__mobile {
     display: block;
-    background: rgba(11, 20, 16, 0.96);
+    background: rgba(7, 16, 10, 0.96);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
     border-top: 1px solid var(--border);

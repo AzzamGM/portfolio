@@ -1,21 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 export default function BackgroundParticles() {
-  const [particlePositions, setParticlePositions] = useState(
-    Array.from({ length: 30 }, (_, i) => ({
-      left: (i * 3.33) % 100,
-      top: (i * 5.67) % 100,
+  const [particlePositions, setParticlePositions] = useState(() =>
+    Array.from({ length: 120 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
     })),
   );
-  useEffect(() => {
-    setParticlePositions(
-      Array.from({ length: 30 }, () => ({
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-      })),
-    );
-  }, []);
 
   const updateParticlePosition = (index: number) => {
     setParticlePositions((prev) =>

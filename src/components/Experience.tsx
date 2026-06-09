@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { HiBriefcase, HiAcademicCap } from 'react-icons/hi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiBriefcase, HiAcademicCap, HiChevronDown } from 'react-icons/hi';
+import { useState } from 'react';
 import { fadeUp, viewport } from '../anim';
 import { experience, education } from '../data';
 import type { RichText } from '../data';
@@ -35,6 +36,8 @@ function keyOf(value: RichText) {
 }
 
 export default function Experience() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <section id="experience" className="section experience">
       <motion.div
@@ -53,38 +56,61 @@ export default function Experience() {
       <div className="timeline">
         <span className="timeline__rail" />
 
-        {experience.map((exp, i) => (
-          <motion.div
-            className="tl-item"
-            key={keyOf(exp.role) + keyOf(exp.org)}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={viewport}
-            transition={{ delay: i * 0.05 }}
-          >
-            <span className={`tl-dot ${exp.current ? 'tl-dot--live' : ''}`}>
-              <HiBriefcase />
-            </span>
-            <div className="tl-card">
-              <div className="tl-card__top">
-                <h3>
-                  <Rich value={exp.role} />
-                </h3>
-                {exp.current && <span className="tl-now">Current</span>}
-              </div>
-              <span className="tl-org">
-                <Rich value={exp.org} />
+        {experience.map((exp, i) => {
+          const isOpen = openIndex === i;
+          return (
+            <motion.div
+              className="tl-item"
+              key={keyOf(exp.role) + keyOf(exp.org)}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewport}
+              transition={{ delay: i * 0.05 }}
+            >
+              <span className={`tl-dot ${exp.current ? 'tl-dot--live' : ''}`}>
+                <HiBriefcase />
               </span>
-              <span className="tl-period">{exp.period}</span>
-              <ul className="tl-points">
-                {exp.points.map((pt) => (
-                  <li key={pt}>{pt}</li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        ))}
+              <div className="tl-card">
+                <button
+                  type="button"
+                  className="tl-card__toggle"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen ? 'true' : 'false'}
+                >
+                  <div className="tl-card__top">
+                    <h3>
+                      <Rich value={exp.role} />
+                    </h3>
+                    {exp.current && <span className="tl-now">Current</span>}
+                  </div>
+                  <span className="tl-org">
+                    <Rich value={exp.org} />
+                  </span>
+                  <span className="tl-period">{exp.period}</span>
+                  <HiChevronDown className={`tl-chevron ${isOpen ? 'tl-chevron--open' : ''}`} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.ul
+                      className="tl-points"
+                      key="points"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      {exp.points.map((pt) => (
+                        <li key={pt}>{pt}</li>
+                      ))}
+                    </motion.ul>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          );
+        })}
 
         {/* Education entry */}
         <motion.div

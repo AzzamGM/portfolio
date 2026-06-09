@@ -20,7 +20,7 @@ export const profile = {
   blurb:
     "Software Engineer and 2024 graduate, now building customer-facing products on the Portal Team at STC. I craft clean, performant web experiences and care about contributing to Saudi Arabia's Vision 2030 through impactful, real-world software.",
   email: "azzamgm1412h@gmail.com",
-  location: "Saudi Arabia",
+  location: "Riyadh, Saudi Arabia",
   github: "https://github.com/AzzamGM ",
   linkedin: "https://www.linkedin.com/in/azzam-al-maimani-2b0350212/",
 };
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     logo: "/portfolio/STC.svg",
     tag: "STC · Channels Platform",
     description:
-      "Played a major role on the Web Portal Team developing, maintaining and improving MySTC.",
+      "Played a major role as a developer in MySTC's Portal Team developing, maintaining and improving MySTC Portal.",
     tech: [
       "Remix",
       "React",
@@ -108,10 +108,10 @@ export const projects: Project[] = [
     tagClass: "project__tag--red",
   },
   {
-    title: "Personal Portfolio",
+    title: "My Other Projects",
     tag: "Open Source",
     description:
-      "This very site — a fully responsive, animated portfolio built with Vite, React & Framer Motion to showcase my work and skills.",
+      "This very site — a fully responsive and animated project — one of many others.",
     tech: ["React", "TypeScript", "CSS"],
     link: "https://github.com/AzzamGM",
     linkText: "Other GitHub Projects",
@@ -134,7 +134,7 @@ export const experience: Experience[] = [
     role: [
       { t: "Developer — " },
       { t: "STC", c: "#420077", badge: true },
-      { t: " (Channels Platform) Portal Team" },
+      { t: " MySTC Portal Team" },
     ],
     org: [
       { t: "Innovation ", c: "#ffffff" },

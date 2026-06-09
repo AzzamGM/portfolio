@@ -18,14 +18,6 @@ export default function Footer() {
           </div>
         </div>
 
-        <nav className="footer__links">
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href}>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
         <div className="footer__socials">
           <a href={`mailto:${profile.email}`} aria-label="Email">
             <HiOutlineMail />

@@ -9,14 +9,14 @@
 
 .timeline__rail {
   position: absolute;
-  left: 27px;
-  top: 8px;
-  bottom: 8px;
+  left: 35px;
+  top: 0;
+  bottom: 0;
   width: 2px;
   background: linear-gradient(
     to bottom,
     var(--accent-2),
-    rgba(34, 211, 238, 0.15) 90%,
+    rgba(0, 148, 72, 0.15) 90%,
     transparent
   );
 }
@@ -44,12 +44,12 @@
   color: var(--accent-2);
   background: var(--bg-elev);
   border: 1px solid var(--border-strong);
-  box-shadow: 0 0 0 6px var(--bg);
 }
 .tl-dot--live {
-  color: #04212b;
+  color: #e8f5ee;
   background: var(--gradient);
-  box-shadow: 0 0 0 6px var(--bg), 0 0 24px var(--accent-glow);
+  border: none;
+  box-shadow: 0 0 24px var(--accent-glow);
 }
 .tl-dot--edu {
   color: #fcd34d;
@@ -86,7 +86,7 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #04212b;
+  color: #e8f5ee;
   background: var(--gradient);
   padding: 3px 10px;
   border-radius: 999px;
@@ -94,9 +94,9 @@
 .tl-gpa {
   font-size: 0.78rem;
   font-weight: 600;
-  color: #fcd34d;
-  background: rgba(252, 211, 77, 0.12);
-  border: 1px solid rgba(252, 211, 77, 0.25);
+  color: #5ddb8f;
+  background: rgba(0, 148, 72, 0.12);
+  border: 1px solid rgba(0, 148, 72, 0.3);
   padding: 3px 10px;
   border-radius: 999px;
 }
@@ -111,16 +111,42 @@
   display: block;
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 14px;
 }
 .tl-card:last-child .tl-period:last-child {
   margin-bottom: 0;
+}
+
+.tl-card__toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  position: relative;
+}
+
+.tl-chevron {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease, color 0.2s ease;
+}
+.tl-chevron--open {
+  transform: rotate(180deg);
+  color: var(--accent-2);
 }
 
 .tl-points {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 14px;
 }
 .tl-points li {
   position: relative;
@@ -149,7 +175,7 @@
     font-size: 1.2rem;
   }
   .timeline__rail {
-    left: 23px;
+    left: 31px;
   }
   .tl-card {
     padding: 18px;

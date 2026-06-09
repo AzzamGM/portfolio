@@ -1,8 +1,49 @@
 import { motion } from 'framer-motion';
 import { HiCheckCircle } from 'react-icons/hi';
+import { useEffect, useState, useRef } from 'react';
 import { fadeUp, stagger, viewport } from '../anim';
 import { profile, highlights, languages } from '../data';
 import './About.css';
+
+const PHRASES = ['curiosity.', 'clean code.', 'Saudi Vision 2030.', 'passion.', 'excellence.', 'creativity.', 'innovation.'];
+const TYPE_SPEED = 80;
+const DELETE_SPEED = 50;
+const PAUSE_MS = 1800;
+
+function TypewriterWord() {
+  const [displayed, setDisplayed] = useState(PHRASES[0]);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const phraseIndex = useRef(0);
+
+  useEffect(() => {
+    const current = PHRASES[phraseIndex.current];
+
+    if (!isDeleting && displayed === current) {
+      const t = setTimeout(() => setIsDeleting(true), PAUSE_MS);
+      return () => clearTimeout(t);
+    }
+
+    if (isDeleting && displayed === '') {
+      phraseIndex.current = (phraseIndex.current + 1) % PHRASES.length;
+      setIsDeleting(false);
+      return;
+    }
+
+    const next = isDeleting
+      ? current.slice(0, displayed.length - 1)
+      : current.slice(0, displayed.length + 1);
+
+    const t = setTimeout(() => setDisplayed(next), isDeleting ? DELETE_SPEED : TYPE_SPEED);
+    return () => clearTimeout(t);
+  }, [displayed, isDeleting]);
+
+  return (
+    <>
+      <span className="accent typewriter-word">{displayed}</span>
+      <span className="typewriter-cursor">|</span>
+    </>
+  );
+}
 
 export default function About() {
   return (
@@ -16,7 +57,7 @@ export default function About() {
       >
         <span className="section-eyebrow">About Me</span>
         <h2 className="section-title">
-          Driven by <span className="accent">curiosity</span> &amp; clean code
+          Driven by <TypewriterWord />
         </h2>
       </motion.div>
 

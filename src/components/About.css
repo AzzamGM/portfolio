@@ -1,3 +1,17 @@
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -2px;
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
 .about__head {
   margin-bottom: 48px;
 }
