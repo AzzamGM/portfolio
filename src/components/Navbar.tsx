@@ -89,7 +89,7 @@ export default function Navbar() {
               ))}
             </ul>
             <a
-              className="btn btn-primary nav__mobile-cta"
+              className="nav__mobile-cta"
               href="#contact"
               onClick={() => setOpen(false)}
             >
