@@ -52,8 +52,8 @@
   box-shadow: 0 0 24px var(--accent-glow);
 }
 .tl-dot--edu {
-  color: #fcd34d;
-  border-color: rgba(252, 211, 77, 0.4);
+  color: #22d3ee;
+  border-color: rgba(34, 211, 238, 0.4);
 }
 
 .tl-card {
@@ -94,9 +94,9 @@
 .tl-gpa {
   font-size: 0.78rem;
   font-weight: 600;
-  color: #5ddb8f;
-  background: rgba(0, 148, 72, 0.12);
-  border: 1px solid rgba(0, 148, 72, 0.3);
+  color: #22d3ee;
+  background: rgba(34, 211, 238, 0.12);
+  border: 1px solid rgba(34, 211, 238, 0.3);
   padding: 3px 10px;
   border-radius: 999px;
 }

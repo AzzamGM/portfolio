@@ -117,13 +117,15 @@ export default function Experience() {
           whileInView="show"
           viewport={viewport}
         >
-          <span className="tl-dot tl-dot--edu">
+          <span className="tl-dot tl-dot--edu" style={{ color: '#22d3ee' }}>
             <HiAcademicCap />
           </span>
           <div className="tl-card">
             <div className="tl-card__top">
               <h3>{education.degree}</h3>
-              <span className="tl-gpa">GPA {education.gpa}</span>
+              <span className="tl-gpa" style={{ color: '#22d3ee' }}>
+                GPA {education.gpa}
+              </span>
             </div>
             <span className="tl-org">
               <Rich value={education.school} />
