@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import {
   HiArrowDown,
-  HiOutlineMail,
   HiOutlineLocationMarker,
   HiOutlineGlobe
 } from 'react-icons/hi';
