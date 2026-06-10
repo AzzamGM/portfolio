@@ -116,6 +116,15 @@ export const projects: Project[] = [
     link: "https://github.com/AzzamGM",
     linkText: "Other GitHub Projects",
   },
+  {
+    title: "Personal Finacial Helper",
+    tag: "Finance",
+    description:
+        "A modern personal finance platform designed to simplify expense tracking, budget planning, and financial analysis with real-time insights.",
+    tech: ["React", "TypeScript", "CSS", "Vite"],
+    link: "https://azzamgm.github.io/financial-helper/",
+    linkText: "View Website",
+  },
 ];
 
 export type Segment = { t: string; c?: string; badge?: boolean };
