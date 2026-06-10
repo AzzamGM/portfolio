@@ -93,7 +93,7 @@ export const projects: Project[] = [
       "Node.js",
     ],
     link: "https://mystc.stc.com.sa/",
-    linkText: "View Project",
+    linkText: "View MySTC Portal",
     featured: true,
     tagClass: "project__tag--purple",
   },
@@ -124,6 +124,7 @@ export const projects: Project[] = [
     tech: ["React", "TypeScript", "CSS", "Vite"],
     link: "https://azzamgm.github.io/financial-helper/",
     linkText: "View Website",
+    featured: true,
   },
 ];
 
