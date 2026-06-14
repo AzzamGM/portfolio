@@ -10,6 +10,9 @@ import {
   SiGit,
   SiGithub,
   SiRedux,
+  SiTailwindcss,
+  SiSocketdotio,
+  SiGitlab
 } from "react-icons/si";
 
 export const profile = {
@@ -42,16 +45,26 @@ export type Skill = {
 };
 
 export const skills: Skill[] = [
-  { name: "React", icon: SiReact, color: "#61DAFB", level: 90 },
-  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 85 },
-  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", level: 90 },
-  { name: "CSS", icon: SiCss, color: "#2965F1", level: 88 },
+  // Frontend
   { name: "HTML", icon: SiHtml5, color: "#E34F26", level: 92 },
-  { name: "Express.js", icon: SiExpress, color: "#cbd5e1", level: 75 },
-  { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E", level: 78 },
+  { name: "React", icon: SiReact, color: "#61DAFB", level: 90 },
   { name: "Redux", icon: SiRedux, color: "#764ABC", level: 72 },
+  { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38bdf8", level: 85 },
+  { name: "CSS", icon: SiCss, color: "#2965F1", level: 88 },
+
+  // Backend
+  { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E", level: 78 },
+  { name: "Express.js", icon: SiExpress, color: "#cbd5e1", level: 75 },
+  { name: "Socket.io", icon: SiSocketdotio, color: "#ffffff", level: 85 },
+
+  // Languages
+  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", level: 90 },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 85 },
+
+  // Version Control & Collaboration
   { name: "Git", icon: SiGit, color: "#F05032", level: 85 },
   { name: "GitHub", icon: SiGithub, color: "#e2e8f0", level: 88 },
+  { name: "GitLab", icon: SiGitlab, color: "#e24329", level: 85 },
 ];
 
 export const techColors: Record<string, string> = {
@@ -60,6 +73,7 @@ export const techColors: Record<string, string> = {
   Vite: "#bd34fe",
   Tailwind: "#38bdf8",
   TanStack: "#ef4444",
+  "Socket.io": "#ffffff",
 };
 
 export type Project = {
@@ -98,6 +112,15 @@ export const projects: Project[] = [
     tagClass: "project__tag--purple",
   },
   {
+    title: "3 Steps Ahead",
+    tag: "Multiplayer Game",
+    description: "A real-time multiplayer browser game with lobby matchmaking, reconnect-safe state recovery, round-based combat, and live player updates.",
+    tech: ["React", "Express.js", "Socket.io", "CSS", "Tailwind"],
+    link: "https://3stepahead.com/",
+    linkText: "View Website",
+    tagClass: "project__tag--blue",
+  },
+  {
     title: "BAAM",
     tag: "Esports Website",
     description:
@@ -123,8 +146,8 @@ export const projects: Project[] = [
         "A modern personal finance platform designed to simplify expense tracking, budget planning, and financial analysis with real-time insights.",
     tech: ["React", "TypeScript", "CSS", "Vite"],
     link: "https://azzamgm.github.io/financial-helper/",
-    linkText: "View Website",
-    featured: true,
+    linkText: "View Live Demo",
+    featured: false,
   },
 ];
 
