@@ -148,6 +148,7 @@ export const projects: Project[] = [
     link: "https://azzamgm.github.io/financial-helper/",
     linkText: "View Live Demo",
     featured: false,
+    tagClass: "project__tag--yellow",
   },
 ];
 

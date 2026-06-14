@@ -63,6 +63,18 @@
   background: rgba(255, 28, 28, 0.16);
   border-color: rgba(255, 0, 0, 0.35);
 }
+.project__tag--blue {
+  color: #00b4ff;
+  background: rgba(0, 180, 255, 0.16);
+  border-color: rgba(0, 180, 255, 0.35);
+}
+.project__tag--yellow {
+  color: #f5d600;
+  background: rgba(245, 214, 0, 0.16);  
+  border-color: rgba(245, 214, 0, 0.35);
+}
+
+
 .project__star {
   display: inline-flex;
   align-items: center;
