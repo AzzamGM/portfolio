@@ -121,12 +121,12 @@ export const projects: Project[] = [
     tagClass: "project__tag--blue",
   },
   {
-    title: "BAAM",
-    tag: "Esports Website",
+    title: "Esports Website",
+    tag: "Store & more", 
     description:
       "An Esports homepage featuring live match updates, team standings, schedule details, and an integrated merchandise store.",
     tech: ["React", "TypeScript", "CSS", "Vite"],
-    link: "https://azzamgm.github.io/BAAM/",
+    link: "https://azzamgm.github.io/esports-page//",
     linkText: "View Live Demo",
     tagClass: "project__tag--red",
   },
