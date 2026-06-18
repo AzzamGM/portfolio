@@ -1,0 +1,268 @@
+import { useEffect, useRef } from "react";
+
+const CELL = 46; // px size of each square cell (incl. gap)
+const SQUARE = 38; // px drawn square size
+const RADIUS = 32; // px mouse influence radius
+const DECAY = 0.92; // per-frame fade of lit cells
+const BASE_ALPHA = 0.01; // resting square opacity
+const KEY_STRIDE = 4096; // > max columns, for packing (row,col) into one number
+
+const PULSE_SPEED = 340; // px/sec the ring expands
+const PULSE_LIFE = 0.9; // sec until a pulse fully fades
+const PULSE_BAND = 30; // px thickness of the glowing ring
+
+const TRACER_MAX = 3; // most autonomous trails alive at once
+const TRACER_SPEED = [32, 48]; // cells/sec range a tracer travels
+const TRACER_GAP = [2400, 5200]; // ms range between spawns
+
+const rand = (min: number, max: number) => min + Math.random() * (max - min);
+
+type Tracer = {
+  axis: "h" | "v";
+  line: number; // row (h) or column (v) the tracer runs along
+  pos: number; // current cell index along the travel axis
+  prev: number;
+  dir: 1 | -1;
+  speed: number; // cells/sec
+  length: number; // cells to travel
+  travelled: number;
+};
+
+export default function InteractiveGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    // Lit cells keyed by document-space (row, col) so the trail is anchored
+    // to the page and scrolls with it. Only active cells live here.
+    const intensity = new Map<number, number>();
+
+    const mouse = { x: -9999, y: -9999, px: -9999, py: -9999, active: false };
+
+    // Tap/click bursts: an expanding ring of glow, stored in document space.
+    let pulses: { x: number; y: number; start: number }[] = [];
+
+    // Autonomous trails that dart along grid lines to keep the bg lively.
+    let tracers: Tracer[] = [];
+    let nextSpawn = performance.now() + rand(TRACER_GAP[0], TRACER_GAP[1]);
+    let lastTime = performance.now();
+
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    const onMove = (e: PointerEvent) => {
+      if (!mouse.active) {
+        // First sample after (re)entering: no segment to fill yet.
+        mouse.px = e.clientX;
+        mouse.py = e.clientY;
+      }
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    };
+    const onLeave = () => {
+      mouse.active = false;
+    };
+    const onDown = (e: PointerEvent) => {
+      pulses.push({
+        x: e.clientX,
+        y: e.clientY + window.scrollY,
+        start: performance.now(),
+      });
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerout", onLeave);
+    window.addEventListener("pointerdown", onDown, { passive: true });
+
+    let raf = 0;
+    const offset = SQUARE / 2;
+
+    const render = () => {
+      const w = canvas.width / dpr;
+      const h = canvas.height / dpr;
+      const scrollY = window.scrollY;
+      const now = performance.now();
+      const dt = Math.min((now - lastTime) / 1000, 0.05); // clamp tab-refocus jumps
+      lastTime = now;
+      ctx.clearRect(0, 0, w, h);
+
+      // Seed intensity along the cursor's path this frame (document space), so
+      // a fast move fills a continuous trail instead of leaving gaps.
+      if (mouse.active && !reduceMotion) {
+        const seed = (px: number, docY: number) => {
+          const minCol = Math.max(0, Math.floor((px - RADIUS) / CELL));
+          const maxCol = Math.floor((px + RADIUS) / CELL);
+          const minRow = Math.floor((docY - RADIUS) / CELL);
+          const maxRow = Math.floor((docY + RADIUS) / CELL);
+          for (let r = minRow; r <= maxRow; r++) {
+            for (let c = minCol; c <= maxCol; c++) {
+              const cx = c * CELL + offset;
+              const cy = r * CELL + offset;
+              const dist = Math.hypot(cx - px, cy - docY);
+              if (dist < RADIUS) {
+                const v = 1 - dist / RADIUS;
+                const key = r * KEY_STRIDE + c;
+                if (v > (intensity.get(key) || 0)) intensity.set(key, v);
+              }
+            }
+          }
+        };
+
+        const dx = mouse.x - mouse.px;
+        const dy = mouse.y - mouse.py;
+        const travelled = Math.hypot(dx, dy);
+        // One sample per ~half-radius keeps the trail seamless; cap the count
+        // so a huge jump (e.g. tab refocus) stays cheap.
+        const steps = Math.min(64, Math.ceil(travelled / (RADIUS * 0.5)));
+        for (let s = 1; s <= steps; s++) {
+          const t = s / steps;
+          seed(mouse.px + dx * t, mouse.py + dy * t + scrollY);
+        }
+        // Always seed the current point (covers the stationary case too).
+        seed(mouse.x, mouse.y + scrollY);
+
+        mouse.px = mouse.x;
+        mouse.py = mouse.y;
+      }
+
+      // Expand any active tap/click pulses as rings of glow (document space).
+      if (pulses.length) {
+        for (const p of pulses) {
+          const age = (now - p.start) / 1000;
+          const life = 1 - age / PULSE_LIFE;
+          if (life <= 0) continue;
+          const ring = age * PULSE_SPEED;
+          const reach = ring + PULSE_BAND;
+          const minCol = Math.max(0, Math.floor((p.x - reach) / CELL));
+          const maxCol = Math.floor((p.x + reach) / CELL);
+          const minRow = Math.floor((p.y - reach) / CELL);
+          const maxRow = Math.floor((p.y + reach) / CELL);
+          for (let r = minRow; r <= maxRow; r++) {
+            for (let c = minCol; c <= maxCol; c++) {
+              const cx = c * CELL + offset;
+              const cy = r * CELL + offset;
+              const dist = Math.hypot(cx - p.x, cy - p.y);
+              const edge = Math.abs(dist - ring);
+              if (edge < PULSE_BAND) {
+                const v = life * (1 - edge / PULSE_BAND);
+                const key = r * KEY_STRIDE + c;
+                if (v > (intensity.get(key) || 0)) intensity.set(key, v);
+              }
+            }
+          }
+        }
+        pulses = pulses.filter((p) => (now - p.start) / 1000 < PULSE_LIFE);
+      }
+
+      const startRow = Math.floor(scrollY / CELL);
+      const endRow = Math.ceil((scrollY + h) / CELL);
+      const endCol = Math.ceil(w / CELL);
+
+      // Spawn and advance autonomous tracers along grid lines.
+      if (!reduceMotion) {
+        if (now >= nextSpawn && tracers.length < TRACER_MAX) {
+          const dir: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
+          const speed = rand(TRACER_SPEED[0], TRACER_SPEED[1]);
+          if (Math.random() < 0.5) {
+            // Horizontal: enter from one edge, travel the full screen width.
+            const line = startRow + Math.floor(rand(0, endRow - startRow + 1));
+            const start = dir === 1 ? -1 : endCol + 1;
+            const length = endCol + 2;
+            tracers.push({ axis: "h", line, pos: start, prev: start, dir, speed, length, travelled: 0 });
+          } else {
+            // Vertical: travel the full page height, from the very top row to
+            // the very bottom (not just the visible viewport).
+            const totalRows = Math.ceil(
+              document.documentElement.scrollHeight / CELL,
+            );
+            const line = Math.floor(rand(0, endCol + 1));
+            const start = dir === 1 ? -1 : totalRows + 1;
+            const length = totalRows + 2;
+            tracers.push({ axis: "v", line, pos: start, prev: start, dir, speed, length, travelled: 0 });
+          }
+          nextSpawn = now + rand(TRACER_GAP[0], TRACER_GAP[1]);
+        }
+
+        for (const tr of tracers) {
+          tr.prev = tr.pos;
+          tr.pos += tr.dir * tr.speed * dt;
+          tr.travelled += tr.speed * dt;
+          // Light every cell the head crossed this frame (head = full intensity;
+          // the decay pass leaves a fading tail behind it).
+          const from = Math.round(tr.prev);
+          const to = Math.round(tr.pos);
+          const step = to >= from ? 1 : -1;
+          for (let p = from; p !== to + step; p += step) {
+            const key =
+              tr.axis === "h" ? tr.line * KEY_STRIDE + p : p * KEY_STRIDE + tr.line;
+            intensity.set(key, 1);
+          }
+        }
+        tracers = tracers.filter((tr) => tr.travelled < tr.length);
+      }
+
+      // Draw the resting grid + lit cells for the rows/cols currently on screen.
+      for (let r = startRow; r <= endRow; r++) {
+        for (let c = 0; c <= endCol; c++) {
+          const lit = intensity.get(r * KEY_STRIDE + c) || 0;
+          const alpha = BASE_ALPHA + lit * 0.85;
+
+          const x = c * CELL;
+          const y = r * CELL - scrollY;
+
+          if (lit > 0.04) {
+            ctx.shadowColor = `rgba(0, 230, 110, ${lit * 0.8})`;
+            ctx.shadowBlur = 18 * lit;
+          } else {
+            ctx.shadowBlur = 0;
+          }
+          ctx.fillStyle = `rgba(0, 196, 94, ${alpha})`;
+          ctx.fillRect(x, y, SQUARE, SQUARE);
+        }
+      }
+      ctx.shadowBlur = 0;
+
+      // Fade all lit cells (including off-screen ones) and drop the dim ones.
+      for (const [key, v] of intensity) {
+        const next = v * DECAY;
+        if (next < 0.02) intensity.delete(key);
+        else intensity.set(key, next);
+      }
+
+      raf = requestAnimationFrame(render);
+    };
+
+    raf = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerout", onLeave);
+      window.removeEventListener("pointerdown", onDown);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="interactive-grid" aria-hidden="true" />;
+}

@@ -1,8 +1,8 @@
 :root {
   --bg: #07100a;
   --bg-elev: #0b1610;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.06);
+  --bg-card: #0e1711;
+  --bg-card-hover: #161e19;
   --border: rgba(0, 148, 72, 0.22);
   --border-strong: rgba(0, 148, 72, 0.55);
 
@@ -50,6 +50,7 @@ body {
   padding: 0;
   background: var(--bg);
   overflow-x: hidden;
+  z-index: -2;
 }
 
 body {
@@ -73,7 +74,7 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   background-image:
     linear-gradient(rgba(0, 148, 72, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 148, 72, 0.03) 1px, transparent 1px);
