@@ -40,8 +40,10 @@
 .footer__brand strong {
   color: var(--text-h);
   font-family: var(--heading);
+  font-size: 1.15rem;
+  font-weight: 700;
 }
-.footer__brand span {
+.footer__brand div span {
   font-size: 0.85rem;
 }
 

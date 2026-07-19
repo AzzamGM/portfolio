@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedinIn, FaWrench } from 'react-icons/fa';
+import { FaCode, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { profile } from '../data';
 import './Footer.css';
@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="footer__inner">
         <div className="footer__brand">
           <span className="footer__logo">
-            <FaWrench />
+            <FaCode />
           </span>
           <div>
             <strong>{profile.name}</strong>
