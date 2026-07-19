@@ -44,7 +44,10 @@ export default function Footer() {
       <div className="footer__bottom">
         <div className="footer__bottom-inner">
           <span>
-            © {year} {profile.name}. Built with React, Vite &amp; Framer Motion.
+            © {year} {profile.name}
+            <span className="footer__built-with">
+              . Built with React, Vite &amp; Framer Motion.
+            </span>
           </span>
           <span className="footer__vision">Proudly contributing to Vision 2030 🇸🇦</span>
         </div>
