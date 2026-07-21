@@ -12,7 +12,9 @@ import {
   SiRedux,
   SiTailwindcss,
   SiSocketdotio,
-  SiGitlab
+  SiGitlab,
+  SiPrisma,
+  SiPostgresql
 } from "react-icons/si";
 
 export const profile = {
@@ -56,6 +58,8 @@ export const skills: Skill[] = [
   { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E", level: 78 },
   { name: "Express.js", icon: SiExpress, color: "#cbd5e1", level: 75 },
   { name: "Socket.io", icon: SiSocketdotio, color: "#ffffff", level: 85 },
+  { name: "Prisma", icon: SiPrisma, color: "#2dd4bf", level: 70 },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", level: 70 },
 
   // Languages
   { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", level: 90 },
@@ -74,6 +78,8 @@ export const techColors: Record<string, string> = {
   Tailwind: "#38bdf8",
   TanStack: "#ef4444",
   "Socket.io": "#ffffff",
+  Prisma: "#2dd4bf",
+  PostgreSQL: "#336791",
 };
 
 export type Project = {

@@ -1,30 +1,30 @@
 import { useEffect, useRef } from "react";
 
-const CELL = 46; // px size of each square cell (incl. gap)
-const SQUARE = 38; // px drawn square size
-const RADIUS = 32; // px mouse influence radius
-const DECAY = 0.92; // per-frame fade of lit cells
-const BASE_ALPHA = 0.01; // resting square opacity
-const KEY_STRIDE = 4096; // > max columns, for packing (row,col) into one number
+const CELL = 46;
+const SQUARE = 38;
+const RADIUS = 32;
+const DECAY = 0.92;
+const BASE_ALPHA = 0.01;
+const KEY_STRIDE = 4096;
 
-const PULSE_SPEED = 340; // px/sec the ring expands
-const PULSE_LIFE = 0.9; // sec until a pulse fully fades
-const PULSE_BAND = 30; // px thickness of the glowing ring
+const PULSE_SPEED = 340;
+const PULSE_LIFE = 0.9;
+const PULSE_BAND = 30;
 
-const TRACER_MAX = 3; // most autonomous trails alive at once
-const TRACER_SPEED = [32, 48]; // cells/sec range a tracer travels
-const TRACER_GAP = [2400, 5200]; // ms range between spawns
+const TRACER_MAX = 3;
+const TRACER_SPEED = [32, 48];
+const TRACER_GAP = [2400, 5200];
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
 
 type Tracer = {
   axis: "h" | "v";
-  line: number; // row (h) or column (v) the tracer runs along
-  pos: number; // current cell index along the travel axis
+  line: number;
+  pos: number;
   prev: number;
   dir: 1 | -1;
-  speed: number; // cells/sec
-  length: number; // cells to travel
+  speed: number;
+  length: number;
   travelled: number;
 };
 
@@ -43,16 +43,12 @@ export default function InteractiveGrid() {
 
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // Lit cells keyed by document-space (row, col) so the trail is anchored
-    // to the page and scrolls with it. Only active cells live here.
     const intensity = new Map<number, number>();
 
     const mouse = { x: -9999, y: -9999, px: -9999, py: -9999, active: false };
 
-    // Tap/click bursts: an expanding ring of glow, stored in document space.
     let pulses: { x: number; y: number; start: number }[] = [];
 
-    // Autonomous trails that dart along grid lines to keep the bg lively.
     let tracers: Tracer[] = [];
     let nextSpawn = performance.now() + rand(TRACER_GAP[0], TRACER_GAP[1]);
     let lastTime = performance.now();
@@ -73,7 +69,7 @@ export default function InteractiveGrid() {
 
     const onMove = (e: PointerEvent) => {
       if (!mouse.active) {
-        // First sample after (re)entering: no segment to fill yet.
+
         mouse.px = e.clientX;
         mouse.py = e.clientY;
       }
@@ -107,8 +103,6 @@ export default function InteractiveGrid() {
       lastTime = now;
       ctx.clearRect(0, 0, w, h);
 
-      // Seed intensity along the cursor's path this frame (document space), so
-      // a fast move fills a continuous trail instead of leaving gaps.
       if (mouse.active && !reduceMotion) {
         const seed = (px: number, docY: number) => {
           const minCol = Math.max(0, Math.floor((px - RADIUS) / CELL));
