@@ -112,6 +112,16 @@ export const projects: Project[] = [
     tagClass: "project__tag--purple",
   },
   {
+    title: "MediBook",
+    tag: "Full-Stack Web App",
+    description:
+      "A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
+    tech: ["React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Tailwind"],
+    link: "https://azzamgm.github.io/appointment-booking/",
+    linkText: "View Website",
+    tagClass: "project__tag--teal",
+  },
+  {
     title: "3 Steps Ahead",
     tag: "Multiplayer Game",
     description: "A real-time multiplayer browser game with lobby matchmaking, reconnect-safe state recovery, round-based combat, and live player updates.",
@@ -134,7 +144,7 @@ export const projects: Project[] = [
     title: "My Other Projects",
     tag: "Open Source",
     description:
-      "This very site — a fully responsive and animated project — one of many others.",
+      "This very site - a fully responsive and animated project - one of many others.",
     tech: ["React", "TypeScript", "CSS"],
     link: "https://github.com/AzzamGM",
     linkText: "Other GitHub Projects",
@@ -166,7 +176,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     role: [
-      { t: "Developer — " },
+      { t: "Developer - " },
       { t: "STC", c: "#420077", badge: true },
       { t: " MySTC Portal Team" },
     ],
@@ -174,7 +184,7 @@ export const experience: Experience[] = [
       { t: "Innovation ", c: "#ffffff" },
       { t: "Team", c: "rgb(58, 156, 242)" },
     ],
-    period: "Dec 2024 — Present",
+    period: "Dec 2024 - Present",
     current: true,
     points: [
       "Developed and delivered 40+ change requests (CRs), shipping customer-facing features to production.",
@@ -186,7 +196,7 @@ export const experience: Experience[] = [
   {
     role: "Summer Training Program",
     org: "SAMI Advanced Technologies",
-    period: "Jun 2024 — Aug 2024 · 2 months",
+    period: "Jun 2024 - Aug 2024 · 2 months",
     points: [
       "Assisted in investigating and fixing real bugs and issues within existing production projects.",
       "Gained hands-on experience of how software engineering work is carried out in a professional environment.",
@@ -195,7 +205,7 @@ export const experience: Experience[] = [
   {
     role: "Training Program",
     org: "Arabian Cement Company",
-    period: "May 2021 — Jul 2021 · 2 months",
+    period: "May 2021 - Jul 2021 · 2 months",
     points: [
       "Gained early industry exposure through a structured two-month training program.",
     ],
@@ -210,7 +220,7 @@ export const education: {
 } = {
   degree: "Bachelor of Software Engineering",
   school: "University of Business and Technology (UBT)",
-  period: "2019 — 2024",
+  period: "2019 - 2024",
   gpa: "4.27 / 5.0",
 };
 

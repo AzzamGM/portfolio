@@ -70,8 +70,13 @@
 }
 .project__tag--yellow {
   color: #f5d600;
-  background: rgba(245, 214, 0, 0.16);  
+  background: rgba(245, 214, 0, 0.16);
   border-color: rgba(245, 214, 0, 0.35);
+}
+.project__tag--teal {
+  color: #2dd4bf;
+  background: rgba(45, 212, 191, 0.16);
+  border-color: rgba(45, 212, 191, 0.35);
 }
 
 

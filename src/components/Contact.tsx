@@ -59,7 +59,7 @@ export default function Contact() {
         </motion.h2>
         <motion.p className="contact__lead" variants={fadeUp}>
           I’m currently open to new opportunities and collaborations. Whether you
-          have a role in mind or just want to connect — my inbox is always open.
+          have a role in mind or just want to connect - my inbox is always open.
         </motion.p>
 
         <motion.a
