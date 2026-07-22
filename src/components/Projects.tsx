@@ -34,7 +34,9 @@ export default function Projects() {
         {projects.map((p) => (
           <motion.article
             key={p.title}
-            className={`project ${p.featured ? 'project--featured' : ''}`}
+            className={`project${p.featured ? ' project--featured' : ''}${
+              p.hero ? ' project--hero' : ''
+            }`}
             variants={fadeUp}
             whileHover={{ y: -8 }}
           >

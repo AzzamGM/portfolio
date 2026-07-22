@@ -91,6 +91,8 @@ export type Project = {
   link?: string;
   linkText?: string;
   featured?: boolean;
+  /** Full-width lead card at the top of the projects grid. */
+  hero?: boolean;
   tagClass?: string;
 };
 
@@ -115,16 +117,18 @@ export const projects: Project[] = [
     link: "https://mystc.stc.com.sa/",
     linkText: "View MySTC Portal",
     featured: true,
+    hero: true,
     tagClass: "project__tag--purple",
   },
   {
     title: "MediBook",
     tag: "Full-Stack Web App",
     description:
-      "A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
+      "A fully functional full-stack application, A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
     tech: ["React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Tailwind"],
     link: "https://azzamgm.github.io/appointment-booking/",
-    linkText: "View Website",
+    linkText: "View Live Demo",
+    featured: true,
     tagClass: "project__tag--teal",
   },
   {
@@ -134,6 +138,7 @@ export const projects: Project[] = [
     tech: ["React", "Express.js", "Socket.io", "CSS", "Tailwind"],
     link: "https://3stepahead.com/",
     linkText: "View Website",
+    featured: true,
     tagClass: "project__tag--blue",
   },
   {
@@ -147,15 +152,6 @@ export const projects: Project[] = [
     tagClass: "project__tag--red",
   },
   {
-    title: "My Other Projects",
-    tag: "Open Source",
-    description:
-      "This very site - a fully responsive and animated project - one of many others.",
-    tech: ["React", "TypeScript", "CSS"],
-    link: "https://github.com/AzzamGM",
-    linkText: "Other GitHub Projects",
-  },
-  {
     title: "Personal Finacial Helper",
     tag: "Finance",
     description:
@@ -165,6 +161,15 @@ export const projects: Project[] = [
     linkText: "View Live Demo",
     featured: false,
     tagClass: "project__tag--yellow",
+  },
+  {
+    title: "My Github Projects",
+    tag: "Open Source",
+    description:
+      "Most of my projects are in private repositories, but feel free to look around!",
+    tech: ["React", "TypeScript", "CSS"],
+    link: "https://github.com/AzzamGM",
+    linkText: "Other GitHub Projects",
   },
 ];
 
