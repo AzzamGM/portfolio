@@ -180,4 +180,28 @@
   .tl-card {
     padding: 18px;
   }
+
+  .tl-card__toggle {
+    padding-bottom: 22px;
+  }
+  .tl-card__toggle::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    height: 1px;
+    background: var(--border);
+  }
+  .tl-chevron {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -11px;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+  }
+  .tl-chevron--open {
+    transform: translateX(-50%) rotate(180deg);
+  }
 }
