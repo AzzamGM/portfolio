@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { HiBriefcase, HiAcademicCap, HiChevronDown } from 'react-icons/hi';
 import { useState } from 'react';
 import { fadeUp, viewport } from '../anim';
@@ -43,7 +43,7 @@ export default function Experience() {
         variants={fadeUp}
         initial="hidden"
         whileInView="show"
-        viewport={viewport}
+        viewport={{ ...viewport, once: true }}
       >
         <span className="section-eyebrow">Experience &amp; Education</span>
         <h2 className="section-title">
@@ -63,7 +63,7 @@ export default function Experience() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={viewport}
+              viewport={{ ...viewport, once: true }}
               transition={{ delay: i * 0.05 }}
             >
               <span className={`tl-dot ${exp.current ? 'tl-dot--live' : ''}`}>
@@ -88,23 +88,15 @@ export default function Experience() {
                   <span className="tl-period">{exp.period}</span>
                   <HiChevronDown className={`tl-chevron ${isOpen ? 'tl-chevron--open' : ''}`} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.ul
-                      className="tl-points"
-                      key="points"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      style={{ overflow: 'hidden' }}
-                    >
+                <div className={`tl-points-wrap ${isOpen ? 'tl-points-wrap--open' : ''}`}>
+                  <div className="tl-points-inner">
+                    <ul className="tl-points">
                       {exp.points.map((pt) => (
                         <li key={pt}>{pt}</li>
                       ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </motion.div>
           );
@@ -115,7 +107,7 @@ export default function Experience() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={viewport}
+          viewport={{ ...viewport, once: true }}
         >
           <span className="tl-dot tl-dot--edu" style={{ color: '#22d3ee' }}>
             <HiAcademicCap />

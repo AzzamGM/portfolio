@@ -133,7 +133,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: var(--text-muted);
   transition: transform 0.3s ease, color 0.2s ease;
 }
@@ -142,11 +142,24 @@
   color: var(--accent-2);
 }
 
+.tl-points-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+.tl-points-wrap--open {
+  grid-template-rows: 1fr;
+}
+.tl-points-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
 .tl-points {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 14px;
+  padding-top: 14px;
 }
 .tl-points li {
   position: relative;
@@ -199,7 +212,7 @@
     top: auto;
     bottom: -11px;
     transform: translateX(-50%);
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
   .tl-chevron--open {
     transform: translateX(-50%) rotate(180deg);
