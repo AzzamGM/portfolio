@@ -17,6 +17,7 @@
   justify-content: center;
   gap: 14px;
   text-align: center;
+  aspect-ratio: 1 / 1;
   background: var(--bg-card);
   border: 1px solid
     color-mix(in srgb, var(--skill-color) calc(55% * var(--glow)), var(--border));
@@ -63,5 +64,19 @@
 @media (max-width: 480px) {
   .skills__grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .skill {
+    gap: 8px;
+    padding: 14px 8px;
+  }
+  .skill__icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 1.5rem;
+  }
+  .skill__name {
+    font-size: 0.72rem;
   }
 }
