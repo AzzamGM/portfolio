@@ -80,6 +80,8 @@ export const techColors: Record<string, string> = {
   "Socket.io": "#ffffff",
   Prisma: "#2dd4bf",
   PostgreSQL: "#336791",
+  Python: "#3776AB",
+  "GitHub Actions": "#2088FF",
 };
 
 export type Project = {
@@ -121,15 +123,26 @@ export const projects: Project[] = [
     tagClass: "project__tag--purple",
   },
   {
-    title: "MediBook",
-    tag: "Full-Stack Web App",
+    title: "MENA Stats",
+    tag: "Esports Analytics Platform",
     description:
-      "A fully functional full-stack application, A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
-    tech: ["React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Tailwind"],
-    link: "https://azzamgm.github.io/appointment-booking/",
-    linkText: "View Live Demo",
+      "A public statistics archive for Middle East and North Africa League of Legends esports — 1,000+ matches, 80+ teams and 250+ players from Riot's Arabian League, updated automatically in real time.",
+    tech: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "TanStack",
+      "Node.js",
+      "Express.js",
+      "Prisma",
+      "PostgreSQL",
+      "Python",
+      "GitHub Actions",
+    ],
+    link: "https://menastats.com",
+    linkText: "View Live Site",
     featured: true,
-    tagClass: "project__tag--teal",
+    tagClass: "project__tag--green",
   },
   {
     title: "3 Steps Ahead",
@@ -140,6 +153,16 @@ export const projects: Project[] = [
     linkText: "View Website",
     featured: true,
     tagClass: "project__tag--blue",
+  },
+  {
+    title: "MediBook",
+    tag: "Full-Stack Web App",
+    description:
+      "A fully functional full-stack application, A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
+    tech: ["React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Tailwind"],
+    link: "https://azzamgm.github.io/appointment-booking/",
+    linkText: "View Live Demo",
+    tagClass: "project__tag--teal",
   },
   {
     title: "Esports Website",

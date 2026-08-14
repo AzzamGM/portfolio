@@ -2,16 +2,17 @@
   margin-bottom: 48px;
 }
 
-/* 6 columns so cards can be a third (span 2), a half (span 3),
-   or full width (span 6) and still pack into clean rows. */
+/* 6 columns so cards can be a half (span 3) or full width (span 6)
+   and still pack into clean rows. */
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  grid-auto-flow: dense;
   gap: 22px;
 }
 
 .project {
-  grid-column: span 2;
+  grid-column: span 3;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,7 +31,7 @@
 }
 
 .project--featured {
-  grid-column: span 3;
+  grid-column: span 6;
   background: linear-gradient(
     160deg,
     rgba(0, 148, 72, 0.08),
@@ -39,9 +40,21 @@
   border-color: var(--border-strong);
 }
 
-/* Lead card: full width across the top. Must follow --featured to win. */
+/* Lead card: full width across the top, themed to match MySTC's own
+   purple brand (see .project__tag--purple). Must follow --featured to win. */
 .project--hero {
   grid-column: span 6;
+  background: linear-gradient(
+    160deg,
+    rgba(168, 85, 247, 0.18),
+    var(--bg-card) 60%
+  );
+  border-color: rgba(168, 85, 247, 0.55);
+  box-shadow: 0 0 50px rgba(168, 85, 247, 0.28);
+}
+.project--hero:hover {
+  border-color: rgba(168, 85, 247, 0.9);
+  box-shadow: 0 0 55px rgba(168, 85, 247, 0.4);
 }
 
 .project__top {
@@ -85,6 +98,11 @@
   color: #2dd4bf;
   background: rgba(45, 212, 191, 0.16);
   border-color: rgba(45, 212, 191, 0.35);
+}
+.project__tag--green {
+  color: #00c45e;
+  background: rgba(0, 196, 94, 0.16);
+  border-color: rgba(0, 196, 94, 0.35);
 }
 
 
@@ -167,16 +185,19 @@
 .project__link:hover {
   gap: 12px;
 }
+.project--hero .project__link {
+  color: #c893fb;
+}
 
-/* Tablet: two columns — hero stays full width, everything else halves. */
+/* Tablet: two columns — hero and featured stay full width, everything else halves. */
 @media (max-width: 1024px) {
   .projects__grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .project,
-  .project--featured {
+  .project {
     grid-column: span 1;
   }
+  .project--featured,
   .project--hero {
     grid-column: span 2;
   }
