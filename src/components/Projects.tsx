@@ -31,12 +31,14 @@ export default function Projects() {
         whileInView="show"
         viewport={viewport}
       >
-        {projects.map((p) => (
+        {projects.map((p) => {
+          const accentClass = p.tagClass?.replace('project__tag--', 'project--');
+          return (
           <motion.article
             key={p.title}
             className={`project${p.featured ? ' project--featured' : ''}${
               p.hero ? ' project--hero' : ''
-            }`}
+            }${accentClass ? ` ${accentClass}` : ''}`}
             variants={fadeUp}
             whileHover={{ y: -8 }}
           >
@@ -89,7 +91,8 @@ export default function Projects() {
               </a>
             )}
           </motion.article>
-        ))}
+          );
+        })}
       </motion.div>
     </section>
   );

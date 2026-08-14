@@ -57,6 +57,23 @@
   box-shadow: 0 0 55px rgba(168, 85, 247, 0.4);
 }
 
+/* MENA Stats: gold accent (#d8a657) instead of the default featured green. */
+.project--gold {
+  background: linear-gradient(
+    160deg,
+    rgba(216, 166, 87, 0.16),
+    var(--bg-card) 60%
+  );
+  border-color: rgba(216, 166, 87, 0.45);
+}
+.project--gold:hover {
+  border-color: rgba(216, 166, 87, 0.85);
+  box-shadow: 0 0 45px rgba(216, 166, 87, 0.28);
+}
+.project--gold .project__link {
+  color: #d8a657;
+}
+
 .project__top {
   display: flex;
   justify-content: space-between;
@@ -103,6 +120,11 @@
   color: #00c45e;
   background: rgba(0, 196, 94, 0.16);
   border-color: rgba(0, 196, 94, 0.35);
+}
+.project__tag--gold {
+  color: #d8a657;
+  background: rgba(216, 166, 87, 0.16);
+  border-color: rgba(216, 166, 87, 0.35);
 }
 
 

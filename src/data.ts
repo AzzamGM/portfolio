@@ -142,7 +142,7 @@ export const projects: Project[] = [
     link: "https://menastats.com",
     linkText: "View Live Site",
     featured: true,
-    tagClass: "project__tag--green",
+    tagClass: "project__tag--gold",
   },
   {
     title: "3 Steps Ahead",
