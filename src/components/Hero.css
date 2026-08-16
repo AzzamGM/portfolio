@@ -52,14 +52,14 @@
 
 .hero__name {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.05;
   margin-bottom: 10px;
 }
 
 .hero__role {
   font-size: clamp(1.3rem, 3vw, 2rem);
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 22px;
 }
 .hero__role-accent {
@@ -151,9 +151,20 @@
   cursor: grabbing;
 }
 
+.hero__canvas-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 6rem;
+  color: var(--accent-2);
+  filter: drop-shadow(0 0 16px var(--accent-glow));
+  pointer-events: none;
+}
+
 .hero__name {
   font-size: clamp(2.6rem, 6vw, 4.4rem);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.05;
   margin-bottom: 10px;
 }
@@ -162,9 +173,9 @@
   position: absolute;
   display: grid;
   place-items: center;
-  width: 78px;
-  height: 78px;
-  font-size: 2.6rem;
+  width: 102px;
+  height: 102px;
+  font-size: 3.4rem;
   background: none;
   border: none;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
@@ -249,9 +260,9 @@
     margin-bottom: 10px;
   }
   .orbit {
-    width: 58px;
-    height: 58px;
-    font-size: 2rem;
+    width: 74px;
+    height: 74px;
+    font-size: 2.6rem;
   }
   .hero__scroll {
     display: none;

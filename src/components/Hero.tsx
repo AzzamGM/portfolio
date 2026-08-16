@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import {
   HiArrowDown,
   HiOutlineLocationMarker,
-  HiOutlineGlobe
+  HiOutlineGlobe,
+  HiOutlineCode
 } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import {
@@ -124,17 +125,30 @@ export default function Hero() {
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
           <PlanetVisual />
+          <span className="hero__canvas-icon">
+            <HiOutlineCode strokeWidth={1} />
+          </span>
         </motion.div>
 
         {float.map(({ Icon, color, className }, i) => (
           <motion.div
             key={i}
             className={className}
-            animate={{ y: [0, -14, 0] }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1, y: [0, -14, 0] }}
             transition={{
-              duration: 3 + i,
-              repeat: Infinity,
-              ease: 'easeInOut',
+              opacity: { duration: 0.5, delay: 1.1 + i * 0.18, ease: 'easeOut' },
+              scale: {
+                duration: 0.6,
+                delay: 1.1 + i * 0.18,
+                ease: [0.34, 1.56, 0.64, 1],
+              },
+              y: {
+                duration: 3 + i,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 1.1 + i * 0.18 + 0.6,
+              },
             }}
             style={{ color }}
           >

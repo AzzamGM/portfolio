@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
-import { FaCode } from 'react-icons/fa';
+import { HiMenu, HiX, HiOutlineCode } from 'react-icons/hi';
 import { navLinks } from '../data';
 import './Navbar.css';
 
@@ -33,7 +32,7 @@ export default function Navbar() {
       <nav className="nav__inner">
         <a href="#home" className="nav__brand" onClick={() => setOpen(false)}>
           <span className="nav__logo">
-            <FaCode />
+            <HiOutlineCode />
           </span>
           <span className="nav__brand-text">
             Azzam's <span className="nav__brand-dot">Portfolio.</span>

@@ -99,7 +99,7 @@ export default function InteractiveGrid() {
       const h = canvas.height / dpr;
       const scrollY = window.scrollY;
       const now = performance.now();
-      const dt = Math.min((now - lastTime) / 1000, 0.05); // clamp tab-refocus jumps
+      const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
       ctx.clearRect(0, 0, w, h);
 
@@ -126,21 +126,17 @@ export default function InteractiveGrid() {
         const dx = mouse.x - mouse.px;
         const dy = mouse.y - mouse.py;
         const travelled = Math.hypot(dx, dy);
-        // One sample per ~half-radius keeps the trail seamless; cap the count
-        // so a huge jump (e.g. tab refocus) stays cheap.
         const steps = Math.min(64, Math.ceil(travelled / (RADIUS * 0.5)));
         for (let s = 1; s <= steps; s++) {
           const t = s / steps;
           seed(mouse.px + dx * t, mouse.py + dy * t + scrollY);
         }
-        // Always seed the current point (covers the stationary case too).
         seed(mouse.x, mouse.y + scrollY);
 
         mouse.px = mouse.x;
         mouse.py = mouse.y;
       }
 
-      // Expand any active tap/click pulses as rings of glow (document space).
       if (pulses.length) {
         for (const p of pulses) {
           const age = (now - p.start) / 1000;
@@ -173,20 +169,16 @@ export default function InteractiveGrid() {
       const endRow = Math.ceil((scrollY + h) / CELL);
       const endCol = Math.ceil(w / CELL);
 
-      // Spawn and advance autonomous tracers along grid lines.
       if (!reduceMotion) {
         if (now >= nextSpawn && tracers.length < TRACER_MAX) {
           const dir: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
           const speed = rand(TRACER_SPEED[0], TRACER_SPEED[1]);
           if (Math.random() < 0.5) {
-            // Horizontal: enter from one edge, travel the full screen width.
             const line = startRow + Math.floor(rand(0, endRow - startRow + 1));
             const start = dir === 1 ? -1 : endCol + 1;
             const length = endCol + 2;
             tracers.push({ axis: "h", line, pos: start, prev: start, dir, speed, length, travelled: 0 });
           } else {
-            // Vertical: travel the full page height, from the very top row to
-            // the very bottom (not just the visible viewport).
             const totalRows = Math.ceil(
               document.documentElement.scrollHeight / CELL,
             );
@@ -202,8 +194,6 @@ export default function InteractiveGrid() {
           tr.prev = tr.pos;
           tr.pos += tr.dir * tr.speed * dt;
           tr.travelled += tr.speed * dt;
-          // Light every cell the head crossed this frame (head = full intensity;
-          // the decay pass leaves a fading tail behind it).
           const from = Math.round(tr.prev);
           const to = Math.round(tr.pos);
           const step = to >= from ? 1 : -1;
@@ -216,7 +206,6 @@ export default function InteractiveGrid() {
         tracers = tracers.filter((tr) => tr.travelled < tr.length);
       }
 
-      // Draw the resting grid + lit cells for the rows/cols currently on screen.
       for (let r = startRow; r <= endRow; r++) {
         for (let c = 0; c <= endCol; c++) {
           const lit = intensity.get(r * KEY_STRIDE + c) || 0;
@@ -237,7 +226,6 @@ export default function InteractiveGrid() {
       }
       ctx.shadowBlur = 0;
 
-      // Fade all lit cells (including off-screen ones) and drop the dim ones.
       for (const [key, v] of intensity) {
         const next = v * DECAY;
         if (next < 0.02) intensity.delete(key);
