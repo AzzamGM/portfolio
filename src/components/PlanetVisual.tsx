@@ -6,7 +6,7 @@ import * as THREE from 'three';
 const GLOBE_RADIUS = 1.65;
 const ACCENT = '#00c45e';
 const CORE = '#0e1711';
-const AUTO_ROTATE_SPEED = 0.22; // radians/sec, frame-rate independent
+const AUTO_ROTATE_SPEED = 0.22;
 
 function Globe({ interacting }: { interacting: React.MutableRefObject<boolean> }) {
   const groupRef = useRef<THREE.Group>(null);

@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className={`nav ${scrolled ? 'nav--scrolled' : ''}`}
+      className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -60,40 +60,60 @@ export default function Navbar() {
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <HiX /> : <HiMenu />}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={open ? 'close' : 'menu'}
+              className="nav__burger-icon"
+              initial={{ opacity: 0, rotate: -90, scale: 0.7 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 90, scale: 0.7 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+            >
+              {open ? <HiX /> : <HiMenu />}
+            </motion.span>
+          </AnimatePresence>
         </button>
       </nav>
 
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
             className="nav__mobile"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{
+              height: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+              opacity: { duration: 0.22, ease: 'easeOut' },
+            }}
           >
-            <ul>
-              {navLinks.map((l, i) => (
-                <motion.li
-                  key={l.href}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * i }}
-                >
-                  <a href={l.href} onClick={() => setOpen(false)}>
-                    {l.label}
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
-            <a
-              className="nav__mobile-cta"
-              href="#contact"
-              onClick={() => setOpen(false)}
-            >
-              Let’s Talk
-            </a>
+            <div className="nav__mobile-inner">
+              <ul>
+                {navLinks.map((l, i) => (
+                  <motion.li
+                    key={l.href}
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.06 + 0.04 * i,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    <a href={l.href} onClick={() => setOpen(false)}>
+                      {l.label}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+              <a
+                className="nav__mobile-cta"
+                href="#contact"
+                onClick={() => setOpen(false)}
+              >
+                Let’s Talk
+              </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
