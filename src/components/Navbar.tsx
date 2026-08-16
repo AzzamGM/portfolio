@@ -22,6 +22,31 @@ export default function Navbar() {
     };
   }, [open]);
 
+  const goToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    setOpen(false);
+    // Release the lock now: the effect that clears it runs too late for this scroll.
+    document.body.style.overflow = '';
+
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)')
+      .matches
+      ? 'auto'
+      : 'smooth';
+
+    requestAnimationFrame(() => {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior });
+      window.history.replaceState(null, '', href);
+    });
+  };
+
   return (
     <motion.header
       className={`nav ${scrolled ? 'nav--scrolled' : ''} ${open ? 'nav--open' : ''}`}
@@ -30,7 +55,11 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       <nav className="nav__inner">
-        <a href="#home" className="nav__brand" onClick={() => setOpen(false)}>
+        <a
+          href="#home"
+          className="nav__brand"
+          onClick={(e) => goToSection(e, '#home')}
+        >
           <span className="nav__logo">
             <HiOutlineCode />
           </span>
@@ -100,7 +129,7 @@ export default function Navbar() {
                       ease: [0.22, 1, 0.36, 1],
                     }}
                   >
-                    <a href={l.href} onClick={() => setOpen(false)}>
+                    <a href={l.href} onClick={(e) => goToSection(e, l.href)}>
                       {l.label}
                     </a>
                   </motion.li>
@@ -109,7 +138,7 @@ export default function Navbar() {
               <a
                 className="nav__mobile-cta"
                 href="#contact"
-                onClick={() => setOpen(false)}
+                onClick={(e) => goToSection(e, '#contact')}
               >
                 Let’s Talk
               </a>

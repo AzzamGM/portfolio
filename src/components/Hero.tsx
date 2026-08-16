@@ -3,7 +3,8 @@ import {
   HiArrowDown,
   HiOutlineLocationMarker,
   HiOutlineGlobe,
-  HiOutlineCode
+  HiOutlineCode,
+  HiOutlineMail
 } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import {
@@ -94,6 +95,9 @@ export default function Hero() {
         </motion.div>
 
         <motion.div className="hero__socials" variants={item}>
+          <a href={`mailto:${profile.email}`} aria-label="Email">
+            <HiOutlineMail />
+          </a>
           <a
             href={profile.github}
             target="_blank"

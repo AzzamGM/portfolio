@@ -61,15 +61,6 @@ export default function Contact() {
           I’m currently open to new opportunities and collaborations. Whether you
           have a role in mind or just want to connect - my inbox is always open.
         </motion.p>
-
-        <motion.a
-          className="btn btn-primary contact__main"
-          href={`mailto:${profile.email}`}
-          variants={fadeUp}
-        >
-          <HiOutlineMail /> Say Hello
-        </motion.a>
-
         <motion.div className="contact__grid" variants={stagger}>
           {channels.map((c) => {
             const Icon = c.icon;
