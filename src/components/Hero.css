@@ -128,59 +128,27 @@
   position: relative;
   display: grid;
   place-items: center;
-  height: 440px;
+  height: 500px;
 }
 
-.hero__ring {
+.hero__visual::before {
+  content: '';
   position: absolute;
+  inset: 8%;
   border-radius: 50%;
-  border: 1px dashed rgba(0, 255, 123, 0.35);
-}
-.hero__ring--outer {
-  width: 400px;
-  height: 400px;
-  animation: spin 32s linear infinite;
-}
-.hero__ring--inner {
-  width: 300px;
-  height: 300px;
-  border-style: solid;
-  border-color:  rgba(0, 255, 123, 0.35);
-  animation: spin 60s linear infinite reverse;
-}
-.hero__ring--core {
-  width: 200px;
-  height: 200px;
-  border-style: dashed;
-  border-color: rgba(0, 255, 123, 0.35);
-  border: 1px dashed  rgba(0, 255, 123, 0.35);
-  animation: spin 60s linear infinite reverse;
-}
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  filter: blur(30px);
+  pointer-events: none;
 }
 
-.hero__avatar {
-  width: 220px;
-  height: 220px;
-  display: grid;
-  place-items: center;
-  font-size: 9rem;
-  color: var(--accent-2);
-  background: none;
-  filter: drop-shadow(0 0 28px var(--accent-glow));
-  animation: glow-icon 2s ease-in-out infinite;
+.hero__canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
 }
-
-@keyframes glow-icon {
-  0%, 100% {
-    filter: drop-shadow(0 0 28px var(--accent-glow)) drop-shadow(0 0 8px rgba(0, 148, 72, 0.6));
-  }
-  50% {
-    filter: drop-shadow(0 0 40px var(--accent-glow)) drop-shadow(0 0 20px rgba(0, 148, 72, 0.8));
-  }
+.hero__canvas:active {
+  cursor: grabbing;
 }
 
 .hero__name {
@@ -277,25 +245,8 @@
   }
   .hero__visual {
     order: -1;
-    height: 300px;
+    height: 330px;
     margin-bottom: 10px;
-  }
-  .hero__avatar {
-    width: 150px;
-    height: 150px;
-    font-size: 7rem;
-  }
-  .hero__ring--outer {
-    width: 270px;
-    height: 270px;
-  }
-  .hero__ring--inner {
-    width: 210px;
-    height: 210px;
-  }
-  .hero__ring--core {
-    width: 150px;
-    height: 150px;
   }
   .orbit {
     width: 58px;

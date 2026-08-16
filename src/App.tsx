@@ -8,6 +8,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackgroundParticles from './components/BackgroundParticles';
 import InteractiveGrid from './components/InteractiveGrid';
+import BackToTop from './components/BackToTop';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       </main>
       <BackgroundParticles />
       <Footer />
+      <BackToTop />
     </>
   );
 }

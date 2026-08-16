@@ -5,7 +5,6 @@ import {
   HiOutlineGlobe
 } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { FaCode } from 'react-icons/fa';
 import {
   SiReact,
   SiTypescript,
@@ -13,6 +12,7 @@ import {
   SiNodedotjs,
 } from 'react-icons/si';
 import { profile } from '../data';
+import PlanetVisual from './PlanetVisual';
 import './Hero.css';
 
 const float = [
@@ -114,16 +114,17 @@ export default function Hero() {
 
       <motion.div
         className="hero__visual"
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
       >
-        <div className="hero__ring hero__ring--outer" />
-        <div className="hero__ring hero__ring--inner" />
-        <div className="hero__ring hero__ring--core" />
-        <div className="hero__avatar">
-          <FaCode />
-        </div>
+        <motion.div
+          className="hero__canvas"
+          animate={{ y: [0, -14, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <PlanetVisual />
+        </motion.div>
 
         {float.map(({ Icon, color, className }, i) => (
           <motion.div
