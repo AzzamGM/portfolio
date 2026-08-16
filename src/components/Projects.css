@@ -89,7 +89,7 @@
   background: var(--accent-soft);
   border: 1px solid var(--border);
   padding: 5px 12px;
-  border-radius: 999px;
+  border-radius: 10px;
 }
 .project__tag--purple {
   color: #eeaaff;

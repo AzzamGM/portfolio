@@ -157,7 +157,7 @@
   align-items: center;
   gap: 9px;
   padding: 11px 20px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--heading);
   font-size: 0.9rem;
   font-weight: 600;

@@ -89,7 +89,7 @@
   color: #e8f5ee;
   background: var(--gradient);
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 10px;
 }
 .tl-gpa {
   font-size: 0.78rem;
@@ -98,7 +98,7 @@
   background: rgba(34, 211, 238, 0.12);
   border: 1px solid rgba(34, 211, 238, 0.3);
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 10px;
 }
 
 .tl-org {
