@@ -192,7 +192,7 @@ export const projects: Project[] = [
       "Most of my projects are in private repositories, but feel free to look around!",
     tech: ["React", "TypeScript", "CSS"],
     link: "https://github.com/AzzamGM",
-    linkText: "Other GitHub Projects",
+    linkText: "View My Github",
   },
 ];
 

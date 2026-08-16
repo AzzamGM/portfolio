@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { HiOutlineMail, HiCheck, HiOutlineClipboardCopy } from 'react-icons/hi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { HiArrowUpRight } from 'react-icons/hi2';
@@ -115,6 +115,7 @@ export default function Contact() {
                 rel={external ? 'noreferrer' : undefined}
                 variants={fadeUp}
                 whileHover={{ y: -5 }}
+                aria-label={c.label}
               >
                 <span className="contact__icon">
                   <Icon />
@@ -126,6 +127,23 @@ export default function Contact() {
           })}
         </motion.div>
       </motion.div>
+
+      <AnimatePresence>
+        {copied && (
+          <motion.div
+            className="contact__toast"
+            role="status"
+            aria-live="polite"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <HiCheck />
+            Email copied
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
