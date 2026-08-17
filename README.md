@@ -1,5 +1,23 @@
 # React + TypeScript + Vite
 
+## Visitor count
+
+**Check it here: https://hits.sh/azzamgm.github.io/portfolio/**
+
+That page shows total hits and unique visitors. No login — bookmark it and open
+it whenever you want.
+
+Counting is handled by [hits.sh](https://github.com/silentsoft/hits) (free, MIT,
+no account, no cookies). The code lives in [`src/analytics.ts`](src/analytics.ts)
+and only runs in production builds, so `npm run dev` never inflates the number.
+
+It records a hit, not a full analytics profile — no per-page breakdown, referrers,
+or countries. For that, swap in [GoatCounter](https://www.goatcounter.com/) or
+[Cloudflare Web Analytics](https://www.cloudflare.com/web-analytics/); both are
+free and need a one-line script tag plus a short signup.
+
+---
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
