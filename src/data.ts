@@ -21,7 +21,7 @@ export const profile = {
   name: "Azzam Al-Maimani",
   role: "Software Engineer - Web Developer",
   tagline:
-    "Web developer at STC, building the next generation of MySTC customer portal services.",
+    "Developer @ STC",
   blurb:
     "Software Engineer and 2024 graduate, now building customer-facing products on the Portal Team at STC. I craft clean, performant web experiences and care about contributing to Saudi Arabia's Vision 2030 through impactful, real-world software.",
   email: "azzamgm1412h@gmail.com",

@@ -86,8 +86,8 @@ export default function Hero() {
         </motion.div>
 
         <motion.div className="hero__actions" variants={item}>
-          <a href="#projects" className="btn btn-primary">
-            View My Work <HiArrowDown />
+          <a href="#about" className="btn btn-primary">
+            About Me <HiArrowDown />
           </a>
           <a href="#contact" className="btn btn-ghost">
             Get In Touch
