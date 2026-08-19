@@ -30,4 +30,8 @@ export const stagger: Variants = {
   },
 };
 
-export const viewport = { once: false, amount: 0.2 } as const;
+export const viewport = {
+  once: false,
+  amount: 'some',
+  margin: '200px 0px 200px 0px',
+} as const;

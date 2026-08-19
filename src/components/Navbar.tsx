@@ -32,7 +32,6 @@ export default function Navbar() {
     if (!target) return;
 
     setOpen(false);
-    // Release the lock now: the effect that clears it runs too late for this scroll.
     document.body.style.overflow = '';
 
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)')

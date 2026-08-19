@@ -117,7 +117,7 @@ export default function About() {
                     className="about__lang-fill"
                     initial={{ width: 0 }}
                     whileInView={{ width: `${lang.value}%` }}
-                    viewport={{ once: false, amount: 0.4 }}
+                    viewport={viewport}
                     transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
                   />
                 </div>

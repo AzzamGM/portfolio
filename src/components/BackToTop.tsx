@@ -14,7 +14,7 @@ export default function BackToTop() {
       setVisible(window.scrollY > 600);
       setScrolling(true);
       clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => setScrolling(false), 700);
+      idleTimer = setTimeout(() => setScrolling(false), 250);
     };
 
     setVisible(window.scrollY > 600);
@@ -46,7 +46,7 @@ export default function BackToTop() {
           transition={{
             duration: 0.25,
             ease: [0.22, 1, 0.36, 1],
-            opacity: { duration: scrolling ? 0.2 : 0.45, ease: 'easeOut' },
+            opacity: { duration: scrolling ? 0.2 : 0.25, ease: 'easeOut' },
           }}
         >
           <HiArrowUp />
