@@ -82,6 +82,10 @@ export const techColors: Record<string, string> = {
   PostgreSQL: "#336791",
   Python: "#3776AB",
   "GitHub Actions": "#2088FF",
+  WebSockets: "#ffffff",
+  Vitest: "#fcc72b",
+  oxlint: "#a78bfa",
+  Render: "#46e3b7",
 };
 
 export type Project = {
@@ -146,6 +150,28 @@ export const projects: Project[] = [
     linkText: "View Live Site",
     featured: true,
     tagClass: "project__tag--gold",
+  },
+  {
+    title: "Leaguenames",
+    tag: "Real-Time Multiplayer Game",
+    description:
+      "Codenames played with League of Legends champions — two teams race across a 5×5 board drawn from all 173 champions at the live patch, with the hidden colour key held in server memory so it never reaches a player's browser.",
+    tech: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Node.js",
+      "WebSockets",
+      "PostgreSQL",
+      "Vitest",
+      "oxlint",
+      "GitHub Actions",
+      "Render",
+    ],
+    link: "https://leaguenames.net",
+    linkText: "View Live Site",
+    featured: true,
+    tagClass: "project__tag--green",
   },
   {
     title: "3 Steps Ahead",
