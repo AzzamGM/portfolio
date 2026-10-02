@@ -1,130 +1,111 @@
-import { motion } from 'framer-motion';
-import { HiBriefcase, HiAcademicCap, HiChevronDown } from 'react-icons/hi';
-import { useState } from 'react';
-import { fadeUp, viewport } from '../anim';
-import { experience, education } from '../data';
-import type { RichText } from '../data';
+import { m } from 'framer-motion';
+import { certifications, education, experience } from '../data';
+import { Mask, RevealWords } from '../motion/Reveal';
+import { useReveal } from '../motion/useReveal';
+import { draw, rise, stagger } from '../motion/vocabulary';
+import { Brandify } from './Brand';
+import { Award, Briefcase, GraduationCap } from './icons';
 import './Experience.css';
 
-function Rich({ value }: { value: RichText }) {
-  if (typeof value === 'string') return <>{value}</>;
-  return (
-    <>
-      {value.map((seg, i) => {
-        const style: React.CSSProperties = {};
-        if (seg.c) style.color = seg.c;
-        if (seg.badge) {
-          style.background = 'white';
-          style.paddingLeft = '5px';
-          style.paddingRight = '5px';
-          style.borderRadius = '5px';
-        }
-        return (
-          <span key={i} style={Object.keys(style).length ? style : undefined}>
-            {seg.t}
-          </span>
-        );
-      })}
-    </>
-  );
-}
-
-function keyOf(value: RichText) {
-  return typeof value === 'string' ? value : value.map((s) => s.t).join('');
-}
-
-export default function Experience() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+export function Experience() {
+  const reveal = useReveal(0.2);
 
   return (
-    <section id="experience" className="section experience">
-      <motion.div
-        className="experience__head"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ ...viewport, once: true }}
-      >
-        <span className="section-eyebrow">Experience &amp; Education</span>
-        <h2 className="section-title">
-          My <span className="accent">journey</span> so far
-        </h2>
-      </motion.div>
+    <section id="experience" className="xp ink section" aria-labelledby="xp-title">
+      <div className="wrap">
+        <header className="section__head">
+          <p className="label">
+            <span className="label__no">02</span> — Experience
+          </p>
+          <h2 id="xp-title" className="h2">
+            <RevealWords text="Where I’ve worked" />
+          </h2>
+          <p className="deck">
+            One production role, two training programs, a software engineering degree and three
+            certifications.
+          </p>
+        </header>
 
-      <div className="timeline">
-        <span className="timeline__rail" />
+        <div className="xp__figure grid">
+          <p className="xp__big display">
+            <Mask>
+              <span>40+</span>
+            </Mask>
+          </p>
+          <m.p className="xp__figure-text lead" variants={rise} {...reveal}>
+            change requests developed and delivered to production on the{' '}
+            <Brandify text="MySTC" /> portal since December 2024.
+          </m.p>
+        </div>
 
-        {experience.map((exp, i) => {
-          const isOpen = openIndex === i;
-          return (
-            <motion.div
-              className="tl-item"
-              key={keyOf(exp.role) + keyOf(exp.org)}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ ...viewport, once: true }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <span className={`tl-dot ${exp.current ? 'tl-dot--live' : ''}`}>
-                <HiBriefcase />
-              </span>
-              <div className="tl-card">
-                <button
-                  type="button"
-                  className="tl-card__toggle"
-                  onClick={() => setOpenIndex(isOpen ? null : i)}
-                  aria-expanded={isOpen ? 'true' : 'false'}
-                >
-                  <div className="tl-card__top">
-                    <h3>
-                      <Rich value={exp.role} />
-                    </h3>
-                    {exp.current && <span className="tl-now">Current</span>}
-                  </div>
-                  <span className="tl-org">
-                    <Rich value={exp.org} />
-                  </span>
-                  <span className="tl-period">{exp.period}</span>
-                  <HiChevronDown className={`tl-chevron ${isOpen ? 'tl-chevron--open' : ''}`} />
-                </button>
-                <div className={`tl-points-wrap ${isOpen ? 'tl-points-wrap--open' : ''}`}>
-                  <div className="tl-points-inner">
-                    <ul className="tl-points">
-                      {exp.points.map((pt) => (
-                        <li key={pt}>{pt}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+        <ol className="ledger">
+          {experience.map((e) => (
+            <m.li key={e.role + e.org} className="ledger__row" variants={stagger(0.1)} {...reveal}>
+              <m.span className="rule rule--light ledger__rule" variants={draw} aria-hidden="true" />
+              <m.p className="ledger__period label" variants={rise}>
+                <Briefcase /> {e.period}
+                {e.current && <span className="ledger__now">Current</span>}
+              </m.p>
+              <m.div className="ledger__what" variants={rise}>
+                <h3 className="h3">
+                  <Brandify text={e.role} />
+                </h3>
+                <p className="ledger__org">
+                  <Brandify text={e.org} />
+                </p>
+              </m.div>
+              <m.ul className="ledger__points" variants={rise}>
+                {e.points.map((pt) => (
+                  <li key={pt}>
+                    <Brandify text={pt} />
+                  </li>
+                ))}
+              </m.ul>
+            </m.li>
+          ))}
 
-        <motion.div
-          className="tl-item"
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ ...viewport, once: true }}
-        >
-          <span className="tl-dot tl-dot--edu" style={{ color: '#22d3ee' }}>
-            <HiAcademicCap />
-          </span>
-          <div className="tl-card">
-            <div className="tl-card__top">
-              <h3>{education.degree}</h3>
-              <span className="tl-gpa" style={{ color: '#22d3ee' }}>
-                GPA {education.gpa}
-              </span>
-            </div>
-            <span className="tl-org">
-              <Rich value={education.school} />
-            </span>
-            <span className="tl-period">{education.period}</span>
-          </div>
-        </motion.div>
+          <m.li className="ledger__row" variants={stagger(0.1)} {...reveal}>
+            <m.span className="rule rule--light ledger__rule" variants={draw} aria-hidden="true" />
+            <m.p className="ledger__period label" variants={rise}>
+              <GraduationCap /> {education.period}
+            </m.p>
+            <m.div className="ledger__what" variants={rise}>
+              <h3 className="h3">{education.degree}</h3>
+              <p className="ledger__org">
+                <Brandify text={education.school} />
+              </p>
+            </m.div>
+            <m.ul className="ledger__points" variants={rise}>
+              <li>GPA {education.gpa}</li>
+            </m.ul>
+          </m.li>
+        </ol>
+
+        <p className="label xp__sub">
+          <Award /> Certifications
+        </p>
+        <ol className="ledger ledger--certs">
+          {certifications.map((c) => (
+            <m.li key={c.title} className="ledger__row" variants={stagger(0.1)} {...reveal}>
+              <m.span className="rule rule--light ledger__rule" variants={draw} aria-hidden="true" />
+              <m.p className="ledger__period label" variants={rise}>
+                <Award /> <time dateTime={c.dateTime}>{c.date}</time>
+              </m.p>
+              <m.div className="ledger__what" variants={rise}>
+                <h3 className="h3">
+                  {c.url ? (
+                    <a href={c.url} target="_blank" rel="noreferrer">
+                      <Brandify text={c.title} />
+                    </a>
+                  ) : (
+                    <Brandify text={c.title} />
+                  )}
+                </h3>
+                {c.issuer && <p className="ledger__org">{c.issuer}</p>}
+              </m.div>
+            </m.li>
+          ))}
+        </ol>
       </div>
     </section>
   );

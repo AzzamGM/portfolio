@@ -1,0 +1,404 @@
+.work {
+  padding-bottom: var(--s-10);
+}
+.work .section__head {
+  margin-bottom: var(--s-7);
+}
+
+/* ---- Pinned roster ------------------------------------------------------- */
+
+.roster {
+  position: relative;
+}
+.roster__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.roster__bar {
+  position: absolute;
+  top: calc(var(--nav-h) + var(--s-4));
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-6);
+  padding-bottom: var(--s-3);
+}
+.roster__progress {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+}
+
+.roster__counter {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.roster__win {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+}
+.roster__digit {
+  display: inline-block;
+}
+.roster__total {
+  font-size: 0.5em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--fg-2);
+}
+
+/* Index of all plates: an overview, and a way to jump. */
+.roster__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+}
+.roster__tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5em;
+  padding-block: 4px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--fg-2);
+  border-bottom: 2px solid transparent;
+  transition: color var(--d-fast) var(--ease-out), border-color var(--d-fast) var(--ease-out);
+}
+.roster__tab-no {
+  color: var(--accent);
+}
+.roster__tab:hover {
+  color: var(--fg);
+}
+.roster__tab.is-active {
+  color: var(--fg);
+  border-bottom-color: var(--fg);
+}
+
+.roster__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.roster__hint .cue__arrow {
+  color: var(--accent);
+}
+
+/* ---- Plates --------------------------------------------------------------- */
+
+.plate {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-top: 1px solid var(--fg);
+  padding-top: calc(var(--nav-h) + var(--s-8) + var(--s-2));
+  padding-bottom: var(--s-6);
+}
+.roster__stage .plate:nth-child(odd) {
+  background: var(--bg-2);
+}
+.plate__in {
+  width: 100%;
+}
+
+/* Left column reads top to bottom: kicker, title, one-liner, figures, points.
+   Right column is the spec sheet. */
+.plate__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  row-gap: var(--s-5);
+  align-items: start;
+}
+.plate__kicker {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+}
+.plate__logo {
+  height: 20px;
+  width: auto;
+}
+.plate__title {
+  grid-column: 1 / 8;
+  overflow-wrap: anywhere;
+}
+.plate__summary {
+  grid-column: 1 / 8;
+  font-size: var(--t-lead);
+  line-height: 1.35;
+  max-width: 30ch;
+}
+.plate__media {
+  grid-column: 1 / 8;
+}
+.plate__media img {
+  width: 100%;
+  border: 1px solid var(--line);
+}
+.plate__details {
+  grid-column: 1 / 8;
+  display: grid;
+  gap: var(--s-2);
+  max-width: 48ch;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+.plate__details li {
+  position: relative;
+  padding-left: var(--s-5);
+}
+.plate__details li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 10px;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* Spec sheet: a boxed scorecard with one fact per row. */
+.spec {
+  grid-column: 9 / -1;
+  grid-row: 2 / span 4;
+  align-self: start;
+  border: 1px solid var(--fg);
+  background: var(--bg);
+}
+.spec > div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+.spec > div:first-child {
+  border-top: 0;
+}
+.spec dt {
+  padding-top: 0.25em;
+}
+.spec dd {
+  font-size: var(--t-small);
+  line-height: 1.45;
+}
+.spec__link {
+  font-size: 0.9375rem;
+}
+
+/* Image layout: picture takes the right-hand half; spec drops below the points. */
+.plate__grid--image .plate__title,
+.plate__grid--image .plate__summary,
+.plate__grid--image .plate__details {
+  grid-column: 1 / 6;
+}
+.plate__grid--image .plate__media {
+  grid-column: 7 / -1;
+  grid-row: 2 / span 4;
+}
+.plate__grid--image .spec {
+  grid-column: 1 / 6;
+  grid-row: auto;
+}
+
+.figures {
+  grid-column: 1 / 8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4) var(--s-7);
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-4);
+}
+.figures li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.figures__v {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 3.8vw, 3.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+}
+
+/* Short laptops: keep the whole plate on one screen. */
+@media (min-width: 900px) and (max-height: 820px) {
+  .plate__title {
+    font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+  }
+  .figures__v {
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+  }
+  .plate__grid {
+    row-gap: var(--s-4);
+  }
+  .plate__summary {
+    font-size: 1.25rem;
+  }
+}
+
+/* ---- Static stack ---------------------------------------------------------- */
+
+.stack .plate {
+  position: relative;
+  inset: auto;
+  display: block;
+  padding-block: var(--s-7);
+}
+.stack .plate:nth-child(even) {
+  background: var(--bg-2);
+}
+
+@media (max-width: 899px) {
+  .plate__kicker,
+  .plate__title,
+  .plate__summary,
+  .plate__media,
+  .figures,
+  .plate__details,
+  .spec,
+  .plate__grid--image .plate__title,
+  .plate__grid--image .plate__summary,
+  .plate__grid--image .plate__details,
+  .plate__grid--image .plate__media,
+  .plate__grid--image .spec {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .plate__grid {
+    row-gap: var(--s-5);
+  }
+  .spec {
+    margin-top: var(--s-2);
+  }
+  .figures {
+    gap: var(--s-4) var(--s-6);
+  }
+}
+
+/* ---- The board ------------------------------------------------------------- */
+
+.board {
+  margin-top: var(--s-9);
+}
+.board__head {
+  margin-bottom: var(--s-4);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 1.1fr) 1.5rem;
+  column-gap: var(--gap);
+  align-items: start;
+  padding-block: var(--s-5);
+  border-top: 1px solid var(--line);
+}
+.row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.row__title a {
+  text-decoration: none;
+}
+.row__link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.row:hover .row__title {
+  color: var(--accent);
+}
+.row__desc {
+  margin-top: var(--s-2);
+  max-width: 48ch;
+}
+.row__details {
+  margin-top: var(--s-2);
+  max-width: 48ch;
+  color: var(--fg-2);
+}
+.row__kicker {
+  padding-top: 0.35em;
+}
+.row__stack {
+  color: var(--fg-2);
+  padding-top: 0.1em;
+}
+.row__arrow {
+  justify-self: end;
+  padding-top: 0.2em;
+}
+.row__arrow svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform var(--d-fast) var(--ease-out);
+}
+.row:hover .row__arrow svg {
+  transform: translate(3px, -3px);
+}
+
+@media (max-width: 899px) {
+  .board {
+    margin-top: var(--s-8);
+  }
+  .row {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 1.5rem;
+    row-gap: var(--s-2);
+  }
+  /* Every cell placed explicitly: auto-placement would push the title into
+     the narrow arrow column. */
+  .row__no {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .row__kicker {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+  }
+  .row__arrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  .row__main {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .row__stack {
+    grid-column: 2;
+    grid-row: 3;
+    padding-top: 0;
+  }
+}

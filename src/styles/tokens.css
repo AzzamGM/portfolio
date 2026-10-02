@@ -1,0 +1,95 @@
+/* ---------------------------------------------------------------------------
+   Design tokens — "Match sheet"
+   One neutral base (paper/ink), one accent (signal red), used with discipline.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* Palette */
+  --paper: #f3f0e8;
+  --paper-2: #e9e5da;
+  --ink: #161513;
+  --ink-2: #2a2825;
+  --graphite: #5f5b53;
+  --rule: #d4cfc2;
+  --rule-strong: #aaa496;
+  --signal: #c9351b;
+  --signal-deep: #a52a13;
+
+  /* Semantic (re-mapped inside .ink sections) */
+  --bg: var(--paper);
+  --bg-2: var(--paper-2);
+  --fg: var(--ink);
+  --fg-2: var(--graphite);
+  --line: var(--rule);
+  --line-strong: var(--rule-strong);
+  --accent: var(--signal);
+  --accent-hover: var(--signal-deep);
+  --on-accent: var(--paper);
+
+  /* Type */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', sans-serif;
+  --font-text: 'Newsreader', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, Consolas, monospace;
+
+  --t-display: clamp(4.25rem, 16vw, 15rem);
+  --t-h1: clamp(3rem, 7.5vw, 7rem);
+  --t-h2: clamp(2.75rem, 6vw, 5.5rem);
+  --t-h3: clamp(1.75rem, 3vw, 2.75rem);
+  --t-figure: clamp(2.5rem, 5vw, 4.75rem);
+  --t-lead: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --t-body: 1.125rem;
+  --t-small: 0.9375rem;
+  --t-label: 0.8125rem;
+
+  --track-display: -0.02em;
+  --track-label: 0.14em;
+
+  /* Space (4px base) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* Layout */
+  --max: 1360px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --gap: clamp(16px, 2vw, 24px);
+  --nav-h: 64px;
+  --radius: 2px;
+
+  /* Motion vocabulary — mirrored in src/motion/vocabulary.ts */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --d-fast: 200ms;
+  --d-base: 500ms;
+  --d-slow: 900ms;
+}
+
+/* Inverted section: same palette, flipped roles. Accent is lifted so it
+   still clears AA on ink. */
+.ink {
+  --bg: var(--ink);
+  --bg-2: var(--ink-2);
+  --fg: var(--paper);
+  --fg-2: #a8a299;
+  --line: #3a3835;
+  --line-strong: #5a5752;
+  --accent: #f0603f;
+  --accent-hover: #ff7a5a;
+  --on-accent: var(--ink);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+@media (max-width: 599px) {
+  :root {
+    --nav-h: 56px;
+  }
+}

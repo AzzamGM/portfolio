@@ -1,233 +1,253 @@
-import type { IconType } from "react-icons";
-import {
-  SiReact,
-  SiTypescript,
-  SiJavascript,
-  SiCss,
-  SiHtml5,
-  SiExpress,
-  SiNodedotjs,
-  SiGit,
-  SiGithub,
-  SiRedux,
-  SiTailwindcss,
-  SiSocketdotio,
-  SiGitlab,
-  SiPrisma,
-  SiPostgresql
-} from "react-icons/si";
+/**
+ * Single source of truth for everything on the site.
+ * No icons, no colours, no percentages — just facts.
+ */
 
 export const profile = {
-  name: "Azzam Al-Maimani",
-  role: "Software Engineer - Web Developer",
-  tagline:
-    "Developer @ STC",
-  blurb:
-    "Software Engineer and 2024 graduate, now building customer-facing products on the Portal Team at STC. I craft clean, performant web experiences and care about contributing to Saudi Arabia's Vision 2030 through impactful, real-world software.",
-  email: "azzamgm1412h@gmail.com",
-  location: "Riyadh, Saudi Arabia",
-  github: "https://github.com/AzzamGM ",
-  linkedin: "https://www.linkedin.com/in/azzam-al-maimani-2b0350212/",
+  name: 'Azzam Al-Maimani',
+  firstName: 'Azzam',
+  lastName: 'Al-Maimani',
+  role: 'Software Engineer',
+  title: 'MySTC Portal Team, STC',
+  location: 'Riyadh, Saudi Arabia',
+  timeZone: 'Asia/Riyadh',
+  email: 'azzamgm1412h@gmail.com',
+  github: 'https://github.com/AzzamGM',
+  linkedin: 'https://www.linkedin.com/in/azzam-al-maimani-2b0350212/',
+  status: 'Open to new opportunities',
+  /** Masthead deck — written from the facts below, in first person. */
+  intro:
+    'Software engineer on the MySTC Portal team at STC, shipping customer-facing features to production. The rest of the time I build things that have to keep score: a live esports stats archive and two real-time multiplayer games.',
+  /** About paragraph. Original text, with one phrase simplified (see README TODOs). */
+  bio: 'Software Engineer and 2024 graduate, now building customer-facing products on the Portal Team at STC. I build clean, fast web products and care about contributing to Saudi Arabia’s Vision 2030 through impactful, real-world software.',
+  bio2: 'Over the past year I’ve shipped 40+ change requests into production, working in collaborative, fast-paced teams and growing as an engineer with every feature customers rely on.',
 };
 
-export const highlights: string[] = [
-  "Problem Solving",
-  "Fast Learner",
-  "Communication Skills",
-  "Team Player",
-  "Dynamic & Innovative",
-  "Fluent in English",
+export const workingStyle = [
+  'Problem solving',
+  'Fast learner',
+  'Communication',
+  'Team player',
+  'Dynamic & innovative',
+  'Fluent in English',
 ];
 
-export type Skill = {
-  name: string;
-  icon: IconType;
-  color: string;
-  level: number;
-};
+export type StackGroup = { name: string; items: string[] };
 
-export const skills: Skill[] = [
-  // Frontend
-  { name: "HTML", icon: SiHtml5, color: "#E34F26", level: 92 },
-  { name: "React", icon: SiReact, color: "#61DAFB", level: 90 },
-  { name: "Redux", icon: SiRedux, color: "#764ABC", level: 72 },
-  { name: "Tailwind CSS", icon: SiTailwindcss, color: "#38bdf8", level: 85 },
-  { name: "CSS", icon: SiCss, color: "#2965F1", level: 88 },
-
-  // Backend
-  { name: "Node.js", icon: SiNodedotjs, color: "#5FA04E", level: 78 },
-  { name: "Express.js", icon: SiExpress, color: "#cbd5e1", level: 75 },
-  { name: "Socket.io", icon: SiSocketdotio, color: "#ffffff", level: 85 },
-  { name: "Prisma", icon: SiPrisma, color: "#2dd4bf", level: 70 },
-  { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", level: 70 },
-
-  // Languages
-  { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E", level: 90 },
-  { name: "TypeScript", icon: SiTypescript, color: "#3178C6", level: 85 },
-
-  // Version Control & Collaboration
-  { name: "Git", icon: SiGit, color: "#F05032", level: 85 },
-  { name: "GitHub", icon: SiGithub, color: "#e2e8f0", level: 88 },
-  { name: "GitLab", icon: SiGitlab, color: "#e24329", level: 85 },
+export const stack: StackGroup[] = [
+  { name: 'Frontend', items: ['React', 'Redux', 'Tailwind CSS', 'CSS', 'HTML'] },
+  { name: 'Backend', items: ['Node.js', 'Express.js', 'Socket.io', 'Prisma', 'PostgreSQL'] },
+  { name: 'Languages', items: ['TypeScript', 'JavaScript'] },
+  { name: 'Version control', items: ['Git', 'GitHub', 'GitLab'] },
 ];
 
-export const techColors: Record<string, string> = {
-  ...Object.fromEntries(skills.map((s) => [s.name, s.color])),
-  Remix: "#ffffff",
-  Vite: "#bd34fe",
-  Tailwind: "#38bdf8",
-  TanStack: "#ef4444",
-  "Socket.io": "#ffffff",
-  Prisma: "#2dd4bf",
-  PostgreSQL: "#336791",
-  Python: "#3776AB",
-  "GitHub Actions": "#2088FF",
-  WebSockets: "#ffffff",
-  Vitest: "#fcc72b",
-  oxlint: "#a78bfa",
-  Render: "#46e3b7",
-};
+/** Tools that appear in the projects below but are not core stack. */
+export const alsoUsed = [
+  'Remix',
+  'TanStack',
+  'Vite',
+  'WebSockets',
+  'Python',
+  'GitHub Actions',
+  'Vitest',
+  'oxlint',
+  'Render',
+];
+
+import type { IconName } from './components/iconMap';
+
+export type Figure = { value: string; label: string };
 
 export type Project = {
+  id: string;
+  index: number;
   title: string;
-  logo?: string;
-  tag: string;
-  description: string;
-  tech: string[];
+  kicker: string;
+  /** Category glyph, see ICONS in components/icons.tsx. */
+  icon: IconName;
+  /** One line: what it is. */
+  summary: string;
+  /** Two to four short points: what it does, how, outcome. */
+  details: string[];
+  role: string;
+  status: string;
+  stack: string[];
+  figures?: Figure[];
   link?: string;
-  linkText?: string;
-  featured?: boolean;
-  /** Full-width lead card at the top of the projects grid. */
-  hero?: boolean;
-  tagClass?: string;
+  linkLabel?: string;
+  /** File name under /public. Rendered as a small mark next to the kicker. */
+  logo?: string;
+  /**
+   * Screenshot under /public/work. When present the plate switches to an
+   * image layout. Nothing is invented when it is missing.
+   */
+  image?: { src: string; alt: string; width: number; height: number };
+  featured: boolean;
 };
 
 export const projects: Project[] = [
   {
-    title: "MySTC",
-    logo: "/portfolio/STC.svg",
-    tag: "STC · Channels Platform",
-    description:
-      "Played a major role as a developer in MySTC's Portal Team developing, maintaining and improving MySTC Portal.",
-    tech: [
-      "Remix",
-      "React",
-      "TypeScript",
-      "Redux",
-      "TanStack",
-      "Tailwind",
-      "CSS",
-      "Vite",
-      "Node.js",
+    id: 'mystc',
+    icon: 'globe',
+    index: 1,
+    title: 'MySTC',
+    kicker: 'STC · Channels platform',
+    summary: 'STC’s customer portal. I develop, maintain and improve it on the Portal Team.',
+    details: [
+      'Shipped 40+ change requests to production',
+      'Key role in MySTC 4 and the upcoming MySTC 5 customer portals',
+      'Agile/Scrum delivery with cross-functional teams on tight deadlines',
     ],
-    link: "https://mystc.stc.com.sa/",
-    linkText: "View MySTC Portal",
-    featured: true,
-    hero: true,
-    tagClass: "project__tag--purple",
-  },
-  {
-    title: "MENA Stats",
-    tag: "Esports Analytics Platform",
-    description:
-      "A public statistics archive for Middle East and North Africa League of Legends esports — 1,000+ matches, 80+ teams and 250+ players from Riot's Arabian League, updated automatically in real time.",
-    tech: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "TanStack",
-      "Node.js",
-      "Express.js",
-      "Prisma",
-      "PostgreSQL",
-      "Python",
-      "GitHub Actions",
+    role: 'Developer, Portal Team',
+    status: 'In production',
+    stack: ['Remix', 'React', 'TypeScript', 'Redux', 'TanStack', 'Tailwind', 'CSS', 'Vite', 'Node.js'],
+    figures: [
+      { value: '40+', label: 'change requests shipped' },
+      { value: '4 → 5', label: 'MySTC versions' },
     ],
-    link: "https://menastats.com",
-    linkText: "View Live Site",
+    link: 'https://mystc.stc.com.sa/',
+    linkLabel: 'mystc.stc.com.sa',
+    logo: 'STC.svg',
     featured: true,
-    tagClass: "project__tag--gold",
   },
   {
-    title: "Leaguenames",
-    tag: "Real-Time Multiplayer Game",
-    description:
-      "Codenames played with League of Legends champions — two teams race across a 5×5 board drawn from all 173 champions at the live patch, with the hidden colour key held in server memory so it never reaches a player's browser.",
-    tech: [
-      "React",
-      "TypeScript",
-      "Vite",
-      "Node.js",
-      "WebSockets",
-      "PostgreSQL",
-      "Vitest",
-      "oxlint",
-      "GitHub Actions",
-      "Render",
+    id: 'mena-stats',
+    icon: 'chart',
+    index: 2,
+    title: 'MENA Stats',
+    kicker: 'Esports analytics platform',
+    summary:
+      'A public statistics archive for Middle East and North Africa League of Legends esports.',
+    details: [
+      '1,000+ matches, 80+ teams and 250+ players from Riot’s Arabian League',
+      'Updated automatically in real time',
     ],
-    link: "https://leaguenames.net",
-    linkText: "View Live Site",
+    role: 'Personal project',
+    status: 'Live · updates automatically',
+    stack: ['React', 'TypeScript', 'Vite', 'TanStack', 'Node.js', 'Express.js', 'Prisma', 'PostgreSQL', 'Python', 'GitHub Actions'],
+    figures: [
+      { value: '1,000+', label: 'matches' },
+      { value: '80+', label: 'teams' },
+      { value: '250+', label: 'players' },
+    ],
+    link: 'https://menastats.com',
+    linkLabel: 'menastats.com',
     featured: true,
-    tagClass: "project__tag--green",
   },
   {
-    title: "3 Steps Ahead",
-    tag: "Multiplayer Game",
-    description: "A real-time multiplayer browser game with lobby matchmaking, reconnect-safe state recovery, round-based combat, and live player updates.",
-    tech: ["React", "Express.js", "Socket.io", "CSS", "Tailwind"],
-    link: "https://3stepahead.com/",
-    linkText: "View Website",
+    id: 'leaguenames',
+    icon: 'gamepad',
+    index: 3,
+    title: 'Leaguenames',
+    kicker: 'Real-time multiplayer game',
+    summary: 'Codenames, played with League of Legends champions.',
+    details: [
+      'Two teams race across a 5×5 board drawn from all 173 champions at the live patch',
+      'The hidden colour key is held in server memory, so it never reaches a player’s browser',
+    ],
+    role: 'Personal project',
+    status: 'Live',
+    stack: ['React', 'TypeScript', 'Vite', 'Node.js', 'WebSockets', 'PostgreSQL', 'Vitest', 'oxlint', 'GitHub Actions', 'Render'],
+    figures: [
+      { value: '173', label: 'champions, live patch' },
+      { value: '5×5', label: 'board' },
+      { value: '2', label: 'teams, one hidden key' },
+    ],
+    link: 'https://leaguenames.net',
+    linkLabel: 'leaguenames.net',
     featured: true,
-    tagClass: "project__tag--blue",
   },
   {
-    title: "MediBook",
-    tag: "Full-Stack Web App",
-    description:
-      "A fully functional full-stack application, A clinic appointment platform with role-based access for patients, front-desk staff, and doctors. Features live slot availability, guest booking with OTP, prescriptions, and full English/Arabic RTL support.",
-    tech: ["React", "TypeScript", "Express.js", "Prisma", "PostgreSQL", "Tailwind"],
-    link: "https://azzamgm.github.io/appointment-booking/",
-    linkText: "View Live Demo",
-    tagClass: "project__tag--teal",
+    id: 'three-steps-ahead',
+    icon: 'gamepad',
+    index: 4,
+    title: '3 Steps Ahead',
+    kicker: 'Multiplayer game',
+    summary: 'A real-time multiplayer browser game.',
+    details: [
+      'Lobby matchmaking',
+      'Reconnect-safe state recovery',
+      'Round-based combat with live player updates',
+    ],
+    role: 'Personal project',
+    status: 'Live',
+    stack: ['React', 'Express.js', 'Socket.io', 'CSS', 'Tailwind'],
+    link: 'https://3stepahead.com/',
+    linkLabel: '3stepahead.com',
+    featured: true,
   },
   {
-    title: "Esports Website",
-    tag: "Store & more", 
-    description:
-      "An Esports homepage featuring live match updates, team standings, schedule details, and an integrated merchandise store.",
-    tech: ["React", "TypeScript", "CSS", "Vite"],
-    link: "https://azzamgm.github.io/esports-page/",
-    linkText: "View Live Demo",
-    tagClass: "project__tag--red",
-  },
-  {
-    title: "Personal Finacial Helper",
-    tag: "Finance",
-    description:
-        "A modern personal finance platform designed to simplify expense tracking, budget planning, and financial analysis with real-time insights.",
-    tech: ["React", "TypeScript", "CSS", "Vite"],
-    link: "https://azzamgm.github.io/financial-helper/",
-    linkText: "View Live Demo",
+    id: 'medibook',
+    icon: 'calendar',
+    index: 5,
+    title: 'MediBook',
+    kicker: 'Full-stack web app',
+    summary:
+      'A clinic appointment platform with role-based access for patients, front-desk staff and doctors.',
+    details: [
+      'Live slot availability',
+      'Guest booking with OTP',
+      'Prescriptions',
+      'Full English/Arabic RTL support',
+    ],
+    role: 'Personal project',
+    status: 'Live demo',
+    stack: ['React', 'TypeScript', 'Express.js', 'Prisma', 'PostgreSQL', 'Tailwind'],
+    link: 'https://azzamgm.github.io/appointment-booking/',
+    linkLabel: 'Live demo',
     featured: false,
-    tagClass: "project__tag--yellow",
   },
   {
-    title: "My Github Projects",
-    tag: "Open Source",
-    description:
-      "Most of my projects are in private repositories, but feel free to look around!",
-    tech: ["React", "TypeScript", "CSS"],
-    link: "https://github.com/AzzamGM",
-    linkText: "View My Github",
+    id: 'esports-website',
+    icon: 'trophy',
+    index: 6,
+    title: 'Esports Website',
+    kicker: 'Store & more',
+    summary: 'An esports homepage with an integrated merchandise store.',
+    details: ['Live match updates', 'Team standings and schedule details'],
+    role: 'Personal project',
+    status: 'Live demo',
+    stack: ['React', 'TypeScript', 'CSS', 'Vite'],
+    link: 'https://azzamgm.github.io/esports-page/',
+    linkLabel: 'Live demo',
+    featured: false,
+  },
+  {
+    id: 'financial-helper',
+    icon: 'wallet',
+    index: 7,
+    title: 'Personal Financial Helper',
+    kicker: 'Finance',
+    summary:
+      'A personal finance platform for expense tracking, budget planning and financial analysis.',
+    details: ['Real-time insights'],
+    role: 'Personal project',
+    status: 'Live demo',
+    stack: ['React', 'TypeScript', 'CSS', 'Vite'],
+    link: 'https://azzamgm.github.io/financial-helper/',
+    linkLabel: 'Live demo',
+    featured: false,
+  },
+  {
+    id: 'github',
+    icon: 'github',
+    index: 8,
+    title: 'More on GitHub',
+    kicker: 'Open source',
+    summary: 'Most of my projects are in private repositories, but feel free to look around.',
+    details: [],
+    role: '',
+    status: '',
+    stack: [],
+    link: 'https://github.com/AzzamGM',
+    linkLabel: 'github.com/AzzamGM',
+    featured: false,
   },
 ];
 
-export type Segment = { t: string; c?: string; badge?: boolean };
-export type RichText = string | Segment[];
-
 export type Experience = {
-  role: RichText;
-  org: RichText;
+  role: string;
+  org: string;
   period: string;
   current?: boolean;
   points: string[];
@@ -235,70 +255,75 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    role: [
-      { t: "Developer - " },
-      { t: "STC", c: "#420077", badge: true },
-      { t: " MySTC Portal Team" },
-    ],
-    org: [
-      { t: "Innovation ", c: "#ffffff" },
-      { t: "Team", c: "rgb(58, 156, 242)" },
-    ],
-    period: "Dec 2024 - Present",
+    role: 'Developer, MySTC Portal Team',
+    org: 'STC · Innovation Team',
+    period: 'Dec 2024 — Present',
     current: true,
     points: [
-      "Developed and delivered 40+ change requests (CRs), shipping customer-facing features to production.",
-      "Collaborated with cross-functional teams in an Agile/Scrum environment to deliver features on tight deadlines.",
-      "Played a key role in the development of MySTC 4 and the upcoming MySTC 5 customer portals.",
-      "Managed the onboarding, training and introduction of new employees and co-op trainees.",
+      'Developed and delivered 40+ change requests (CRs), shipping customer-facing features to production.',
+      'Collaborated with cross-functional teams in an Agile/Scrum environment to deliver features on tight deadlines.',
+      'Played a key role in the development of MySTC 4 and the upcoming MySTC 5 customer portals.',
+      'Managed the onboarding, training and introduction of new employees and co-op trainees.',
     ],
   },
   {
-    role: "Summer Training Program",
-    org: "SAMI Advanced Technologies",
-    period: "Jun 2024 - Aug 2024 · 2 months",
+    role: 'Summer Training Program',
+    org: 'SAMI Advanced Technologies',
+    period: 'Jun — Aug 2024',
     points: [
-      "Assisted in investigating and fixing real bugs and issues within existing production projects.",
-      "Gained hands-on experience of how software engineering work is carried out in a professional environment.",
+      'Assisted in investigating and fixing real bugs and issues within existing production projects.',
+      'Gained hands-on experience of how software engineering work is carried out in a professional environment.',
     ],
   },
   {
-    role: "Training Program",
-    org: "Arabian Cement Company",
-    period: "May 2021 - Jul 2021 · 2 months",
-    points: [
-      "Gained early industry exposure through a structured two-month training program.",
-    ],
+    role: 'Training Program',
+    org: 'Arabian Cement Company',
+    period: 'May — Jul 2021',
+    points: ['Gained early industry exposure through a structured two-month training program.'],
   },
 ];
 
-export const education: {
-  degree: string;
-  school: RichText;
-  period: string;
-  gpa: string;
-} = {
-  degree: "Bachelor of Software Engineering",
-  school: "University of Business and Technology (UBT)",
-  period: "2019 - 2024",
-  gpa: "4.27 / 5.0",
+export const education = {
+  degree: 'Bachelor of Software Engineering',
+  school: 'University of Business and Technology (UBT)',
+  period: '2019 — 2024',
+  gpa: '4.27 / 5.0',
 };
 
-export type Language = {
-  name: string;
-  level: string;
-  note?: string;
-  value: number;
+export type Certification = {
+  title: string;
+  date: string;
+  dateTime: string;
+  /** TODO: issuer and credential URL once confirmed. */
+  issuer?: string;
+  url?: string;
 };
 
-export const languages: Language[] = [
-  { name: "Arabic", level: "Native", value: 100 },
-  { name: "English", level: "Fluent", note: "IELTS 6.0 (2018)", value: 98 },
+export const certifications: Certification[] = [
+  { title: 'AWS Core Services and Cloud Foundations', date: 'Aug 2026', dateTime: '2026-08' },
+  { title: 'AWS Serverless Development and Automation', date: 'Aug 2026', dateTime: '2026-08' },
+  {
+    title: 'Application Scalability, Monitoring, and Developer Tools',
+    date: 'Aug 2026',
+    dateTime: '2026-08',
+  },
+];
+
+export const languages = [
+  { name: 'Arabic', level: 'Native' },
+  { name: 'English', level: 'Fluent', note: 'IELTS 6.0, 2018' },
 ];
 
 export const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
+  { label: 'Work', href: '#work' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
 ];
+
+export const site = {
+  url: 'https://azzamgm.github.io/portfolio/',
+  title: 'Azzam Al-Maimani — Software Engineer, Riyadh',
+  description:
+    'Software engineer on the MySTC Portal team at STC, Riyadh. Selected work: MySTC, MENA Stats, Leaguenames and 3 Steps Ahead.',
+};

@@ -16,5 +16,7 @@ export function recordVisit() {
     const img = new Image();
     img.referrerPolicy = "no-referrer";
     img.src = HITS_URL;
-  } catch {}
+  } catch {
+    /* Image constructor unavailable (very old browsers): skip the hit. */
+  }
 }

@@ -1,34 +1,31 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import BackgroundParticles from './components/BackgroundParticles';
-import InteractiveGrid from './components/InteractiveGrid';
-import BackToTop from './components/BackToTop';
-import './App.css';
+import { LazyMotion, MotionConfig, domAnimation } from 'framer-motion';
+import { About } from './components/About';
+import { Contact } from './components/Contact';
+import { Experience } from './components/Experience';
+import { Footer } from './components/Footer';
+import { Masthead } from './components/Masthead';
+import { Nav } from './components/Nav';
+import { ScrollRail } from './components/ScrollRail';
+import { Work } from './components/Work';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <InteractiveGrid />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
-      <BackgroundParticles />
-      <Footer />
-      <BackToTop />
-    </>
+    <LazyMotion features={domAnimation} strict>
+      <MotionConfig reducedMotion="user">
+        <a className="skip" href="#main">
+          Skip to content
+        </a>
+        <Nav />
+        <ScrollRail />
+        <main id="main">
+          <Masthead />
+          <Work />
+          <Experience />
+          <About />
+          <Contact />
+        </main>
+        <Footer />
+      </MotionConfig>
+    </LazyMotion>
   );
 }
-
-export default App;

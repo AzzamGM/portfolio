@@ -1,130 +1,90 @@
-import { motion } from 'framer-motion';
-import { HiCheckCircle } from 'react-icons/hi';
-import { useEffect, useState, useRef } from 'react';
-import { fadeUp, stagger, viewport } from '../anim';
-import { profile, highlights, languages } from '../data';
+import { m } from 'framer-motion';
+import { alsoUsed, education, languages, profile, stack, workingStyle } from '../data';
+import { RevealWords } from '../motion/Reveal';
+import { useReveal } from '../motion/useReveal';
+import { rise, stagger } from '../motion/vocabulary';
+import { Brandify } from './Brand';
+import { GraduationCap, Languages, Layers, Sparkle } from './icons';
 import './About.css';
 
-const PHRASES = ['curiosity.', 'clean code.', 'Saudi Vision 2030.', 'passion.', 'excellence.', 'creativity.', 'innovation.'];
-const TYPE_SPEED = 80;
-const DELETE_SPEED = 50;
-const PAUSE_MS = 1800;
-
-function TypewriterWord() {
-  const [displayed, setDisplayed] = useState(PHRASES[0]);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const phraseIndex = useRef(0);
-
-  useEffect(() => {
-    const current = PHRASES[phraseIndex.current];
-
-    if (!isDeleting && displayed === current) {
-      const t = setTimeout(() => setIsDeleting(true), PAUSE_MS);
-      return () => clearTimeout(t);
-    }
-
-    if (isDeleting && displayed === '') {
-      phraseIndex.current = (phraseIndex.current + 1) % PHRASES.length;
-      setIsDeleting(false);
-      return;
-    }
-
-    const next = isDeleting
-      ? current.slice(0, displayed.length - 1)
-      : current.slice(0, displayed.length + 1);
-
-    const t = setTimeout(() => setDisplayed(next), isDeleting ? DELETE_SPEED : TYPE_SPEED);
-    return () => clearTimeout(t);
-  }, [displayed, isDeleting]);
+export function About() {
+  const reveal = useReveal(0.2);
 
   return (
-    <>
-      <span className="accent typewriter-word">{displayed}</span>
-      <span className="typewriter-cursor">|</span>
-    </>
-  );
-}
+    <section id="about" className="about section" aria-labelledby="about-title">
+      <div className="wrap">
+        <header className="section__head">
+          <p className="label">
+            <span className="label__no">03</span> — About
+          </p>
+          <h2 id="about-title" className="h2">
+            <RevealWords text="In short" />
+          </h2>
+        </header>
 
-export default function About() {
-  return (
-    <section id="about" className="section about">
-      <motion.div
-        className="about__head"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="show"
-        viewport={viewport}
-      >
-        <span className="section-eyebrow">About Me</span>
-        <h2 className="section-title">
-          Driven by <TypewriterWord />
-        </h2>
-      </motion.div>
+        <div className="about__grid grid">
+          <m.div className="about__bio" variants={stagger(0.1)} {...reveal}>
+            <m.p className="lead" variants={rise}>
+              <Brandify text={profile.bio} />
+            </m.p>
+            <m.p className="about__p" variants={rise}>
+              {profile.bio2}
+            </m.p>
+            <m.p className="about__style" variants={rise}>
+              <span className="label">
+                <Sparkle /> Working style
+              </span>
+              <span>{workingStyle.join(' · ')}</span>
+            </m.p>
+          </m.div>
 
-      <div className="about__grid">
-        <motion.div
-          className="about__text"
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-        >
-          <motion.p variants={fadeUp}>{profile.blurb}</motion.p>
-          <motion.p variants={fadeUp} className="about__text-muted">
-            Over the past year I've shipped 40+ change requests into production,
-            thriving in collaborative, fast-paced teams and continuing to grow
-            as an engineer with every feature customers rely on.
-          </motion.p>
+          <m.aside className="about__side" variants={stagger(0.08)} {...reveal}>
+            <m.section aria-labelledby="stack-title" variants={rise}>
+              <h3 id="stack-title" className="label about__side-title">
+                <Layers /> Stack
+              </h3>
+              <dl className="about__stack">
+                {stack.map((g) => (
+                  <div key={g.name}>
+                    <dt className="label">{g.name}</dt>
+                    <dd>{g.items.join(', ')}</dd>
+                  </div>
+                ))}
+                <div>
+                  <dt className="label">In projects</dt>
+                  <dd>{alsoUsed.join(', ')}</dd>
+                </div>
+              </dl>
+            </m.section>
 
-          <motion.ul className="about__highlights" variants={stagger}>
-            {highlights.map((h) => (
-              <motion.li key={h} variants={fadeUp}>
-                <HiCheckCircle /> {h}
-              </motion.li>
-            ))}
-          </motion.ul>
-        </motion.div>
+            <m.section aria-labelledby="edu-title" variants={rise}>
+              <h3 id="edu-title" className="label about__side-title">
+                <GraduationCap /> Education
+              </h3>
+              <p>
+                {education.degree}
+                <br />
+                <span className="about__muted">
+                  <Brandify text={education.school} />, {education.period} · GPA {education.gpa}
+                </span>
+              </p>
+            </m.section>
 
-        <motion.aside
-          className="about__cards"
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewport}
-        >
-          <motion.div className="about__stat" variants={fadeUp}>
-            <span className="about__stat-num">4.27</span>
-            <span className="about__stat-label">GPA / 5.0</span>
-          </motion.div>
-          <motion.div className="about__stat" variants={fadeUp}>
-            <span className="about__stat-num">2024</span>
-            <span className="about__stat-label">SE Graduate</span>
-          </motion.div>
-
-          <motion.div className="about__langs" variants={fadeUp}>
-            <h3>Languages</h3>
-            {languages.map((lang) => (
-              <div className="about__lang" key={lang.name}>
-                <div className="about__lang-top">
-                  <span className="about__lang-name">{lang.name}</span>
-                  <span className="about__lang-level">
-                    {lang.level}
-                    {lang.note ? ` · ${lang.note}` : ''}
+            <m.section aria-labelledby="lang-title" variants={rise}>
+              <h3 id="lang-title" className="label about__side-title">
+                <Languages /> Languages
+              </h3>
+              <p>
+                {languages.map((l, i) => (
+                  <span key={l.name}>
+                    {i > 0 && ' · '}
+                    {l.name} <span className="about__muted">{l.level}{l.note ? ` (${l.note})` : ''}</span>
                   </span>
-                </div>
-                <div className="about__lang-bar">
-                  <motion.span
-                    className="about__lang-fill"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${lang.value}%` }}
-                    viewport={viewport}
-                    transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-                  />
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.aside>
+                ))}
+              </p>
+            </m.section>
+          </m.aside>
+        </div>
       </div>
     </section>
   );

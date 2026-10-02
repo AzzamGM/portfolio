@@ -1,56 +1,38 @@
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
-import { HiOutlineMail, HiOutlineCode } from 'react-icons/hi';
 import { profile } from '../data';
+import { ArrowUp, GitHub, LinkedIn, Mail } from './icons';
 import './Footer.css';
 
-export default function Footer() {
+export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="footer">
-      <div className="footer__inner">
-        <div className="footer__brand">
-          <span className="footer__logo">
-            <HiOutlineCode />
-          </span>
-          <div>
-            <strong>{profile.name}</strong>
-            <span>{profile.role}</span>
-          </div>
-        </div>
-
-        <div className="footer__socials">
-          <a href={`mailto:${profile.email}`} aria-label="Email">
-            <HiOutlineMail />
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-          >
-            <FaGithub />
-          </a>
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn />
-          </a>
-        </div>
-      </div>
-
-      <div className="footer__bottom">
-        <div className="footer__bottom-inner">
-          <span>
-            © {year} {profile.name}
-            <span className="footer__built-with">
-              . Built with React, Vite &amp; Framer Motion.
-            </span>
-          </span>
-          <span className="footer__vision">Proudly contributing to Vision 2030 🇸🇦</span>
-        </div>
+    <footer className="foot">
+      <div className="wrap foot__in">
+        <p className="small">
+          © {year} {profile.name}
+        </p>
+        <p className="small foot__note">
+          Built with React, Vite and Motion. Proudly contributing to Vision 2030.
+        </p>
+        <ul className="foot__links">
+          <li>
+            <a className="arrow-link" href={`mailto:${profile.email}`}>
+              <Mail /> Email
+            </a>
+          </li>
+          <li>
+            <a className="arrow-link" href={profile.github} target="_blank" rel="noreferrer">
+              <GitHub /> GitHub
+            </a>
+          </li>
+          <li>
+            <a className="arrow-link" href={profile.linkedin} target="_blank" rel="noreferrer">
+              <LinkedIn className="ic--linkedin" /> LinkedIn
+            </a>
+          </li>
+        </ul>
+        <a className="arrow-link foot__top" href="#top">
+          Top <ArrowUp />
+        </a>
       </div>
     </footer>
   );

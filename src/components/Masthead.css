@@ -1,0 +1,152 @@
+.mast {
+  padding-top: var(--nav-h);
+}
+
+/* The first screen: labels, name, rule, intro and CTA. */
+.mast__screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-6);
+  padding-block: var(--s-5) var(--s-6);
+}
+
+/* Desktop: the first screen is exactly one viewport tall. The name is sized
+   from the viewport height as well as its width, so everything above always
+   fits, and the bottom band stays empty for the mouse cue. */
+@media (min-width: 900px) {
+  :root {
+    --t-display: clamp(4.25rem, min(16vw, calc((100svh - 500px) / 1.72)), 15rem);
+  }
+  .mast__screen {
+    min-height: calc(100svh - var(--nav-h));
+    gap: clamp(20px, 3.4vh, 48px);
+    padding-block: var(--s-6) calc(var(--s-5) + 76px);
+  }
+}
+
+.mast__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--s-3) var(--s-6);
+}
+.mast__sep {
+  color: var(--accent);
+  margin-inline: 0.5em;
+}
+
+.mast__name-wrap {
+  position: relative;
+}
+.mast__name {
+  margin-left: -0.04em; /* optical: pull the A flush with the margin */
+}
+.mast__line {
+  white-space: nowrap;
+}
+
+/* Sits in the empty space to the right of the first name, on its baseline. */
+.mast__side {
+  position: absolute;
+  right: 0;
+  top: 0;
+  /* Exactly one display line tall, content pushed to its baseline.
+     (No CSS transform here: Motion owns transform on this element.) */
+  height: calc(var(--t-display) * 0.86);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: var(--s-2);
+  padding-bottom: 0.08em;
+  font-size: var(--t-display);
+}
+.mast__side .label {
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-align: right;
+}
+
+.mast__deck {
+  row-gap: var(--s-6);
+  align-items: start;
+}
+.mast__lead {
+  grid-column: 7 / -1;
+  grid-row: 1;
+  max-width: 36ch;
+}
+.mast__cta {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  align-self: end;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+/* Quick facts: the first thing below the fold. */
+.mast__facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--s-5);
+  border-top: 1px solid var(--line);
+  padding-block: var(--s-4) var(--s-6);
+}
+.mast__facts dt {
+  margin-bottom: var(--s-2);
+}
+.mast__facts dd {
+  font-size: var(--t-small);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+.mast__social {
+  white-space: nowrap;
+}
+
+@media (max-width: 899px) {
+  .mast__side {
+    position: static;
+    flex-direction: row;
+    align-items: baseline;
+    height: auto;
+    gap: var(--s-5);
+    padding: var(--s-4) 0 0;
+    font-size: inherit;
+  }
+  .mast__lead {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    max-width: 38ch;
+  }
+  .mast__cta {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .mast__facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .mast__screen {
+    padding-block: var(--s-5);
+  }
+  .mast__facts {
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+  }
+  .mast__facts div {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: var(--s-3);
+    align-items: baseline;
+  }
+  .mast__facts dt {
+    margin: 0;
+  }
+}

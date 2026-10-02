@@ -1,0 +1,278 @@
+/* Scroll furniture. Everything here is placed in space the page keeps empty:
+   the right gutter, the nav bar, or the masthead's reserved band. */
+
+/* ---- Progress rail --------------------------------------------------------- */
+
+.rail {
+  --rail-line: var(--rule);
+  --rail-fg: var(--graphite);
+  --rail-fg-strong: var(--ink);
+  position: fixed;
+  z-index: 90;
+  background: var(--rail-line);
+  pointer-events: none;
+}
+/* Over the inverted section the rail flips with it. */
+.rail.on-ink {
+  --rail-line: #3a3835;
+  --rail-fg: #a8a299;
+  --rail-fg-strong: var(--paper);
+}
+.rail__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--signal);
+}
+.rail__ticks {
+  position: absolute;
+  inset: 0;
+}
+.rail__tick {
+  position: absolute;
+  background: var(--rail-fg);
+}
+.rail__tick.is-passed {
+  background: var(--signal);
+}
+.rail__tick a {
+  pointer-events: auto;
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--rail-fg);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--d-fast) var(--ease-out);
+}
+.rail__tick a:hover,
+.rail__tick a:focus-visible,
+.rail__tick.is-passed a {
+  color: var(--rail-fg-strong);
+}
+/* Section names stay in the accessible name; they show on hover or focus so
+   neighbouring ticks never collide. */
+.rail__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.rail__tick a:hover .rail__label,
+.rail__tick a:focus-visible .rail__label {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+}
+
+/* Desktop: a vertical rule in the right gutter, left of the scrollbar. */
+@media (min-width: 900px) {
+  .rail {
+    right: 18px;
+    top: 50%;
+    width: 2px;
+    height: min(46vh, 420px);
+    transform: translateY(-50%);
+  }
+  .rail__fill {
+    transform-origin: top center;
+  }
+  .rail__tick {
+    top: var(--at);
+    right: -4px;
+    width: 10px;
+    height: 1px;
+  }
+  .rail__tick a {
+    top: 0;
+    right: 12px;
+    writing-mode: vertical-rl;
+    padding-top: 2px;
+  }
+}
+
+/* Phones and tablets: a line under the nav bar. */
+@media (max-width: 899px) {
+  .rail {
+    left: 0;
+    right: 0;
+    top: var(--nav-h);
+    height: 2px;
+  }
+  .rail__fill {
+    transform-origin: left center;
+  }
+  .rail__tick {
+    left: var(--at);
+    top: 0;
+    width: 1px;
+    height: 7px;
+  }
+  .rail__tick a {
+    display: none;
+  }
+}
+
+/* ---- "Next section" cue ---------------------------------------------------- */
+
+.cue {
+  --cue-fg: var(--ink);
+  position: fixed;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1;
+  color: var(--cue-fg);
+  font-variant-numeric: tabular-nums;
+}
+.cue:hover {
+  color: var(--signal);
+}
+.cue__no,
+.cue__arrow {
+  color: var(--signal);
+}
+.cue__arrow {
+  width: 1.1em;
+  height: 1.1em;
+  animation: cue-nudge 2.2s var(--ease-inout) infinite;
+}
+.cue__arrow--up {
+  animation-name: cue-nudge-up;
+}
+@keyframes cue-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+@keyframes cue-nudge-up {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Desktop: set vertically in the right gutter, directly under the rail. */
+@media (min-width: 900px) {
+  .cue {
+    right: 13px;
+    top: calc(50% + min(23vh, 210px) + 16px);
+    writing-mode: vertical-rl;
+  }
+  .cue.on-ink {
+    --cue-fg: var(--paper);
+  }
+}
+
+/* Phones and tablets: inside the nav bar, left of the menu button. */
+@media (max-width: 899px) {
+  .cue {
+    top: 0;
+    right: calc(var(--gutter) + 68px);
+    height: var(--nav-h);
+    z-index: 101;
+  }
+  .nav.is-open ~ .cue {
+    display: none;
+  }
+}
+@media (max-width: 359px) {
+  .cue__label {
+    display: none;
+  }
+}
+
+/* ---- Mouse cue: bottom centre of the first screen -------------------------- */
+
+.mouse {
+  position: fixed;
+  left: 50%;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-2);
+  text-decoration: none;
+  color: var(--ink);
+}
+.mouse:hover {
+  color: var(--signal);
+}
+.mouse__icon {
+  position: relative;
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid currentColor;
+  border-radius: 11px;
+}
+.mouse__wheel {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--signal);
+  animation: mouse-wheel 1.8s var(--ease-inout) infinite;
+}
+@keyframes mouse-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70%,
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+.mouse__label {
+  font-size: 0.6875rem;
+  color: inherit;
+}
+.mouse__arrow {
+  display: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--signal);
+  animation: cue-nudge 2.2s var(--ease-inout) infinite;
+}
+/* Touch laptops and tablets have no mouse: an arrow says the same thing. */
+@media (pointer: coarse) {
+  .mouse__icon {
+    display: none;
+  }
+  .mouse__arrow {
+    display: block;
+  }
+}
+/* The reserved band only exists on desktop layouts with enough height. */
+@media (max-width: 899px), (max-height: 659px) {
+  .mouse {
+    display: none;
+  }
+}
